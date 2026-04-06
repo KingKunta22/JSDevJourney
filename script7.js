@@ -251,4 +251,15 @@ while(i < userInput){
 
 
 
-// Q1: 
+// Q1: [1, 2, 3, 4]
+// Q2: [10, 20]
+// Q3: False
+// Q4: 0
+
+// DEBUG: 
+
+let arr = [1,2,3];
+
+if(arr.includes(2)){
+    console.log("Found");
+}
