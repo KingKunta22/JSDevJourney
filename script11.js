@@ -197,83 +197,296 @@ const prompt = require('prompt-sync')();
 // Loop
 
 
-// Clean Inventory System
+// // Clean Inventory System
+
+// let products = [
+//     {
+//         name: 'Dog Food (Dry)',
+//         price: 100,
+//         stock: 12,
+//     },
+//     {
+//         name: 'Dog Food (Wet)',
+//         price: 120,
+//         stock: 25,
+//     },
+//     {
+//         name: 'Cat Food (Dry)',
+//         price: 110,
+//         stock: 20,
+//     },
+//     {
+//         name: 'Cat Food (Wet)',
+//         price: 115,
+//         stock: 23,
+//     }
+// ]
+
+
+
+// function viewProducts(obj) {
+//     console.log("Here's the list of our products: ")
+
+//     for(let i = 0; i < obj.length; i++){
+//         console.log(obj[i].name + ': ₱' + obj[i].price + ' (' + obj[i].stock + ' left)')
+//     }
+// }
+
+
+// function buyProducts(obj) {
+
+//     for(let i = 0; i < obj.length; i++){
+//         console.log('Enter ' + i + ' to buy ' + obj[i].name + ' for ₱' + obj[i].price + ' (' + obj[i].stock + ' left)')
+//     }
+
+//     let selected = Number(prompt('Enter your choice: '))
+
+//     if(obj[selected].stock <= 0){
+//         console.log('Unfortunately, this product is out of stock, please try another product')
+//         return
+//     } else {
+
+//         obj[selected].stock--
+
+//         console.log(obj[selected].name + ' has been successfully purchased! (' + obj[selected].stock + ' left)')
+//         return
+//     }
+// }
+
+// console.log('Enter 1 to view products | Enter 2 to buy a product | Enter 3 to exit')
+
+// let userInput = prompt('')
+
+// while(true){
+//     if(userInput === '1'){
+//         viewProducts(products)
+//         userInput = prompt('')
+//     } else if(userInput === '2'){
+//         buyProducts(products)
+//         userInput = prompt('')
+//     } else if(userInput === '3'){
+//         break;
+//     } else {
+//         console.log('Invalid input, please try again')
+//         break;
+//     }
+// }
+
+// // Part 3
+
+// // As you said, storing the object's value inside a variable isn't the correct way, it basically duplicates the real value inside the obj
+// // instead of the REAL value, not duplicate it
+// // So it should be this.balance += 100
+
+
+
+
+
+
+
+
+
+
+// Day 9: map(), filter(), find(), and other array methodswoo
+
+// I had to look up how the array methods work in yt lol
+
+// // Exercise 1: Filter
+
+// let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// const evenNumbers = numbers.filter((number) => {
+//     return number = number % 2 === 0
+// })
+
+// console.log(numbers)
+// console.log(evenNumbers)
+
+// Question: What do you even call this (number) => { return }??
+// Is that a function inside the numbers.filter?
+// What arguments does .filter() should accept? Just a function only?
+// In my case (number) => { return } is the function?
+// Why does it look like this, is that aalways the case, or you can do the traditional one, its just that this is the preferred one?
+// Traditional one: 
+
+// numbers.filter(
+//     function(number){
+//         return number = number % 2 === 0
+//     }
+// )
+
+// That works the same right? It's just that I am using arrow function on the first one? Should I always use arrow functions per array methods?
+
+
+
+// Exercise 2: Map
+
+// let prices = [100, 200, 300]
+
+// const priceWithTax = prices.map((price) => {
+//     return price = price + 10;
+// })
+
+// console.log(prices)
+// console.log(priceWithTax)
+
+// Can you also tell me the different types of array methods and its uses
+
+
+
+// Exercise 3: Find
+
+// let users = [
+//   {name: "John", age: 20},
+//   {name: "Anna", age: 25}
+// ]
+
+// const findAnna = users.find((user) => {
+//     return user.name === 'Anna'
+// })
+
+// console.log(findAnna)
+
+
+
+
+// Program 1: Smart Product Search
 
 let products = [
     {
-        name: 'Dog Food (Dry)',
+        name: 'Dog Food',
         price: 100,
         stock: 12,
     },
     {
-        name: 'Dog Food (Wet)',
+        name: 'Cat Food',
         price: 120,
         stock: 25,
     },
     {
-        name: 'Cat Food (Dry)',
+        name: 'Parrot Food',
         price: 110,
         stock: 20,
     },
     {
-        name: 'Cat Food (Wet)',
+        name: 'Hamster Food',
         price: 115,
         stock: 23,
     }
 ]
 
 
+// let userSearch = prompt('Search for a product: ')
 
-function viewProducts(obj) {
-    console.log("Here's the list of our products: ")
+// const findProduct = products.find((product) => {
+//     return product.name.toLowerCase === userSearch.toLowerCase
+// })
 
-    for(let i = 0; i < obj.length; i++){
-        console.log(obj[i].name + ': ₱' + obj[i].price + ' (' + obj[i].stock + ' left)')
-    }
-}
+// Okay, this doesn't work properly, I think I need to loop in an array first
+
+// for(let i = 0; i < products.length; i++){
+//     const findProduct = products.find((product) => {
+//         return product[i].name.toLowerCase === userSearch.toLowerCase
+//     })
+
+//     if(findProduct){
+//         console.log('Found')
+//     } else {
+//         console.log('Not Found')
+//     }
+// }
+
+// Well, I mean loop is kind of unnecessary atp because find is literally searching so..
+
+// const findProduct = products.find((product) => {
+//     return product.name.toLowerCase === userSearch.toLowerCase
+// })
+
+// if(findProduct === true){
+//     console.log('Found')
+//     console.log(findProduct)
+// } else {
+//     console.log('Not Found')
+// }
 
 
-function buyProducts(obj) {
+// Let me try to fix this
 
-    for(let i = 0; i < obj.length; i++){
-        console.log('Enter ' + i + ' to buy ' + obj[i].name + ' for ₱' + obj[i].price + ' (' + obj[i].stock + ' left)')
-    }
+// let userSearch = 'cat food (wet)'
 
-    let selected = Number(prompt('Enter your choice: '))
+// const findProduct = products.find((product) => {
+//     return product.name.toLowerCase === userSearch.toLowerCase
+// })
 
-    if(obj[selected].stock <= 0){
-        console.log('Unfortunately, this product is out of stock, please try another product')
-        return
-    } else {
+// console.log(findProduct)
 
-        obj[selected].stock--
+// // if(findProduct === true){
+// //     console.log('Found')
+// //     console.log(findProduct)
+// // } else {
+// //     console.log('Not Found')
+// // }
 
-        console.log(obj[selected].name + ' has been successfully purchased! (' + obj[selected].stock + ' left)')
-        return
-    }
-}
 
-console.log('Enter 1 to view products | Enter 2 to buy a product | Enter 3 to exit')
+// Now, why is it returning the dog food even if the userSearch is cat food? I think it has something to do with getting the name 
+// I think right now its getting the first index of the array, I need to get inside the object inside of the array to get it right
 
-let userInput = prompt('')
+// let userSearch = 'Cat Food (Wet)'
 
-while(true){
-    if(userInput === '1'){
-        viewProducts(products)
-        userInput = prompt('')
-    } else if(userInput === '2'){
-        buyProducts(products)
-        userInput = prompt('')
-    } else if(userInput === '3'){
-        break;
-    } else {
-        console.log('Invalid input, please try again')
-        break;
-    }
-}
+// const findProduct = products.find((product) => {
+//     return product.name === userSearch
+// })
 
-// Part 3
+// console.log(findProduct)
 
-// As you said, storing the object's value inside a variable isn't the correct way, it basically duplicates the real value inside the obj
-// instead of the REAL value, not duplicate it
-// So it should be this.balance += 100
+// // if(findProduct === true){
+// //     console.log('Found')
+// //     console.log(findProduct)
+// // } else {
+// //     console.log('Not Found')
+// // }
+
+// Oh now it's working, so there was an issue on the to lower case shit???? Okayyy
+// Let me do this again this time:
+
+// let userSearch = prompt('Search for a product: ')
+
+// // const findProduct = products.find((product) => {
+// //     return product.name.toLowerCase === userSearch.toLowerCase
+// // })
+
+// // Oh man, the reason why it wasn't working is because I need a parenthesis, methods have parentheses while properties doesnt have them
+// // toLowerCase isnt a property (I HAD TO USE GOOGLE GEMINI FOR THIS IM SORRY HEHE)
+
+// const findProduct = products.find((product) => {
+//     return product.name.toLowerCase() === userSearch.toLowerCase()
+// })
+
+// if(findProduct){
+//     console.log(findProduct)
+// } else {
+//     console.log('Not Found')
+// }
+
+
+// QUIZ
+
+// Q1: It's kind of similar but the thing is that map creates a new array of that specific function, meanwhile the for loop
+//     just loops an array and then gets its infos inside the array, not recreate the array
+
+// Q2: Afaik, filter() returns an array which is the same as map, but the thing is that, you can put conditions inside an array
+//     so that only specific properties of that object is being fetched and then turned into an array
+
+// Q3: find() returns a boolean value which determines whether that specific value is found inside that array or not
+
+// Debug:
+
+// let nums = [1,2,3]
+
+// let result = nums.filter(function(n){
+//     if(n % 2 === 0){
+//         return n
+//     }
+// })
+
+// console.log(result)
