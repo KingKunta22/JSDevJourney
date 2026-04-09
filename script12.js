@@ -542,94 +542,199 @@ function viewCart(obj){
 
 // I actually need to redo some shits because I need two array of objects, products, and carts
 
+// cart.forEach((item) => {
+//     item.qty = 0;
+// })
+
+// // Let me just clean this up
+// function addItem(product, cart){
+//     let productChoice = Number(prompt('Enter your choice here: '))
+
+//     // Alright now im having a hard time breaking this loop
+//     if(productChoice === 5){
+//         console.log('Thank you for shopping!')
+//         return
+//     }
+
+//     if(product[productChoice].stock <= 0){
+//         console.log('Unfortunately, that product is out of stock. Please try again next time')
+//         return
+//     } else if(product[productChoice].stock > 0){
+//         product[productChoice].stock--
+//         console.log('Product added successfully')
+//         cart[productChoice] = product[productChoice]
+//         // cart.forEach((item) => {
+//         //     // I dont know why both of these conditions succeed
+//         //     // So initialize and put qty for each item in cart
+//         //     item.qty = 0;
+            
+//         // }) Alright, for this block, I need to put it somewhere, so it doesnt go 0 every time this function works
+//         // And then create another foreach to item.qty++????
+
+//         // I think I got it this time:
+//         if(cart[productChoice].qty >= 0){
+//             cart[productChoice].qty++
+//         } else {
+//             cart[productChoice].qty = 1
+//         }
+//         // YEP, ITS WORKING, IDK WHAT MADE THIS SHIT SO HARD IDK WQURQWJKROWPQR
+//         return
+//     } else {
+//         console.log('Invalid input, please try again.')
+//         return
+//     }
+// }
+
+
+// // While loop that runs everytime
+// while(true){
+//     if(userInput === 1){
+//         // View Cart Function
+//         viewCart(cart)
+//         userInput = Number(prompt(''))
+//         continue;
+//     } else if (userInput === 2 && userInput !== 5){
+//         // I put this here from the main for loop to avoid this from ruining the UI or flow of the system, since it keeps
+//         // asking or running this everytime the for loop runs
+//         console.log('Choose which product you wanna add to your cart: ')
+//         for(let i = 0; i < products.length; i++){
+//             console.log('Press ' + i + ' to purchase ' + products[i].name + ' (' + products[i].stock + ' left)')
+//         }
+//         console.log('Press 5 to exit the add item option')
+//         // Add Item Function
+//         // Another loop to choose which item to add
+//         addItem(products, cart)
+        
+//     } else if (userInput === 3){
+//         // Remove Item Function
+//         // Another loop to choose which item to remove
+
+//     } else if (userInput === 4){
+//         // Check total price function
+//         // Make sure to check quantity
+        
+//     } else if (userInput === 5){
+//         // Exit program
+//         break;
+//     } else {
+//         console.log('Invalid input, please start over')
+//         userInput = Number(prompt(''))
+//     }
+// }
+
+
+
+
+
+
+
+
+// IM STUCK AT  BREAKING THE LOOP, LET ME REWRITE EVERYTHING:
+
 cart.forEach((item) => {
     item.qty = 0;
 })
 
-// Let me just clean this up
 function addItem(product, cart){
     let productChoice = Number(prompt('Enter your choice here: '))
 
-    // Alright now im having a hard time breaking this loop
-    if(productChoice === 5){
-        console.log('Thank you for shopping!')
+    // if(productChoice >= product.length || productChoice !== Number) {
+        // Well the condition is actually wrong, I looked it up online, the best way to avoid users from entering unwanted prompts so...
+    if(isNaN(productChoice) || productChoice < 0 || productChoice >= product.length) {
+        console.log('Do not ruin my program please, try again next time')
+        // If I type 5 randomly upon adding items in the cart, it returns undefined but continues
+        productChoice = ''
         return
     }
 
-    if(product[productChoice].stock <= 0){
-        console.log('Unfortunately, that product is out of stock. Please try again next time')
-        return
-    } else if(product[productChoice].stock > 0){
+    if(product[productChoice].stock > 0){
         product[productChoice].stock--
         console.log('Product added successfully')
         cart[productChoice] = product[productChoice]
-        // cart.forEach((item) => {
-        //     // I dont know why both of these conditions succeed
-        //     // So initialize and put qty for each item in cart
-        //     item.qty = 0;
-            
-        // }) Alright, for this block, I need to put it somewhere, so it doesnt go 0 every time this function works
-        // And then create another foreach to item.qty++????
-
-        // I think I got it this time:
         if(cart[productChoice].qty >= 0){
             cart[productChoice].qty++
         } else {
             cart[productChoice].qty = 1
         }
-        // YEP, ITS WORKING, IDK WHAT MADE THIS SHIT SO HARD IDK WQURQWJKROWPQR
         return
-    } else {
-        console.log('Invalid input, please try again.')
-        return
+    } else if(product[productChoice].stock <= 0){
+        console.log('Unfortunately, that product is out of stock. Please try again next time')
+        return 
     }
 }
 
 
-// While loop that runs everytime
+
+function removeItem(cart, index){
+
+    if(isNaN(index) || index >= cart.length || index < 0){
+        console.log('Do not ruin my program please, try again next time')
+        index = ''
+        return
+    }
+
+    console.log(cart[index].name + ' (1) has been successfully removed from your cart')
+
+    if(cart[index].qty <= 0) {
+        console.log('You no longer have an item of this product in your cart')
+        return
+    } else {
+        cart[index].qty--
+        products[index].stock++
+        return cart[index];
+    }
+}
+
+// As much as possible, if it doesn't get really confusing, I use obj as an argument to make it look more formal
+function getTotal(obj){
+    let sum = 0
+    let partialSum = 0
+    for(let i = 0; i < obj.length; i++){
+        partialSum = obj[i].price * obj[i].qty
+        sum += partialSum
+    }
+    console.log('The total of your cart is ₱' + sum)
+}
+
+
+
 while(true){
     if(userInput === 1){
-        // View Cart Function
         viewCart(cart)
         userInput = Number(prompt(''))
         continue;
-    } else if (userInput === 2 && userInput !== 5){
-        // I put this here from the main for loop to avoid this from ruining the UI or flow of the system, since it keeps
-        // asking or running this everytime the for loop runs
+    } else if (userInput === 2){
         console.log('Choose which product you wanna add to your cart: ')
         for(let i = 0; i < products.length; i++){
             console.log('Press ' + i + ' to purchase ' + products[i].name + ' (' + products[i].stock + ' left)')
         }
-        console.log('Press 5 to exit the add item option')
-        // Add Item Function
-        // Another loop to choose which item to add
-        addItem(products, cart)
-        
-    } else if (userInput === 3){
-        // Remove Item Function
-        // Another loop to choose which item to remove
 
+        addItem(products, cart)
+        userInput = Number(prompt(''))
+        // If you're wondering, I just stopped the loop after purchasing so that it doesn't get too complicated
+        // If I did what I had a while ago, I would've had a harder time figuring it out, so instead of fixing it completely with more
+        // complicated code, I just removed it, as long as it works. 
+        // Also, I was doing it for the smooth flow of the program so it wasn't necessary
+    } else if (userInput === 3){
+        console.log('Which product do you want to remove?')
+        for(let i = 0; i < cart.length; i++){
+            console.log('Enter ' + i + ' to remove ' + cart[i].name)
+        }
+        let userRemove = Number(prompt(''))
+        removeItem(cart, userRemove)
+        userInput = Number(prompt(''))
     } else if (userInput === 4){
-        // Check total price function
-        // Make sure to check quantity
-        
+        getTotal(cart)
+        userInput = Number(prompt(''))
     } else if (userInput === 5){
-        // Exit program
+        console.log("Thank you for visiting Leo's Mart. Have a great day!")
         break;
     } else {
         console.log('Invalid input, please start over')
+        userInput = ''
         userInput = Number(prompt(''))
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 
