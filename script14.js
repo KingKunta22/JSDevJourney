@@ -105,6 +105,9 @@ const cart = [
 //     return item.price * item.qty >= 500
 // })
 
+// console.log(getExpensiveItems)
+
+
 // Well, that didn't work xd
 
 // const getExpensiveItems = cart.filter((item) => {
