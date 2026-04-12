@@ -3,12 +3,12 @@ const prompt = require('prompt-sync')()
 // LOTS OF THINGS TO FIX FROM SCRIPT16 (1) TO SCRIPT 17(1)
 // ALSO, THOSE ARRAY OF OBEJCTS, ARE THEY THE ONES CALLED JSON?
 
-const cart = [
-  { name: "Dog Food", price: 500, qty: 2 },
-  { name: "Cat Toy", price: 150, qty: 1 },
-  { name: "Dog Leash", price: 300, qty: 3 },
-  { name: "Bird Food", price: 100, qty: 10 }
-];
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
 
 // // SCRIPT 16 (FIX): Add item (if exists → increase qty, else → add new)
 
@@ -217,27 +217,27 @@ const cart = [
 
 // I AMS OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO FUCKING CONFUSED LIKE WHAT THE FUCK??????????????????????????????????????
 
-const newCart = cart.filter((item) => {
-  if(item.qty >= 2){
-    return item
-  }
-})
+// const newCart = cart.filter((item) => {
+//   if(item.qty >= 2){
+//     return item
+//   }
+// })
 
-const applyDiscount = newCart.map((item) => {
-  return {...newCart, price: item.price -= 50}
-  // WHAT EVEN IS THE DIFFERENCE BETWEEN THE ABOVE AND BELOW?? BOTH RETURNS THE SAME
-  // return {...item, price: item.price -= 50}
-})
+// const applyDiscount = newCart.map((item) => {
+//   return {...newCart, price: item.price -= 50}
+//   // WHAT EVEN IS THE DIFFERENCE BETWEEN THE ABOVE AND BELOW?? BOTH RETURNS THE SAME
+//   // return {...item, price: item.price -= 50}
+// })
 
 
-// AND WHY THE FUCKING HELL IS IT NOT CALCULATING PROPERLY WHEN I AM 100 PERCENT SURE THIS IS THE FORMAT AND HOW IT LOOKS LIKE?????????????????????
-const getTotalPrice = newCart.reduce((total, item) => {
-  return total += item.price * item.qty
-}, 0)
-// WJATEVER. I FORGOT ITS +=, FML
+// // AND WHY THE FUCKING HELL IS IT NOT CALCULATING PROPERLY WHEN I AM 100 PERCENT SURE THIS IS THE FORMAT AND HOW IT LOOKS LIKE?????????????????????
+// const getTotalPrice = newCart.reduce((total, item) => {
+//   return total += item.price * item.qty
+// }, 0)
+// // WJATEVER. I FORGOT ITS +=, FML
 
-console.log(newCart)
-console.log(getTotalPrice)
+// console.log(newCart)
+// console.log(getTotalPrice)
 
 
 
@@ -249,3 +249,166 @@ console.log(getTotalPrice)
 // DAY 18
 
 
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
+
+// Exercise 1
+
+// const updateItem = cart.map((item) => {
+//   if(item.name.toLowerCase() === "Dog Food") {
+//     return {...item, qty: 10}
+//   }
+//   return item
+// })
+
+// console.log(cart)
+// console.log(updateItem)
+
+// Array methods really fuck up my mind and I can tell that I do not understand most of it because IDK everything keeps on changing????????????
+
+// const updateItem = cart.map((item) => {
+//   if(item.name === "Dog Food") {
+//     return {...item, qty: 10}
+//   }
+//   return item
+// })
+
+// console.log(updateItem)
+
+// Oh okay, I just IDKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK it was because of .toLowerCase which was unnecessary
+// But is this right that I used ...item instead of ...cart on the return if statement? Explain the difference please elboarte
+
+
+
+// Exercise 2
+
+// const removeItems = cart.filter(item => item.price >= 200)
+
+// Okay, its working but I think its wrong because it directly updated the cart, or im overthinking??
+
+
+
+// Exercise 3
+
+// const increaseQty = cart.map(item => item.qty++)
+
+
+// PROGRAM 1 (GUIDED)
+
+// You didn't specify which item, so I'll just use userInput
+// You also didn't specify if adding or subtracting, so I'll try both
+
+// Nevermind, I think it'll be too complex, so I'll just choose Dog Food
+
+// const updateCart = cart.map((item) => {
+//   if(item.name === 'Dog Food'){
+//     return {...item, qty: 5}
+//   }
+//   return item
+// })
+
+
+
+
+// PROGRAM 2 (UNGUIDED)
+
+// Remove items with qty = 0? Does that mean it includes an updating of cart quantity?
+// Okay, I'll try
+
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
+
+// console.log("Press 1 to view cart | Press 2 to remove/add quantity | Press 3 to exit")
+
+// function viewCart(obj) {
+//     console.log("Here's your cart:")
+//   for(let i = 0; i < obj.length; i++){
+//     console.log((i+1) + ") " + obj[i].name + "[" + obj[i].qty + "] - ₱" + obj[i].price * obj[i].qty + " (₱" + obj[i].price + " each)") 
+//   }
+// }
+
+// I am just gonna assume that the user knows the products since there is a view cart
+// function addItem(object, target) {
+
+// }
+// Also, should I do it like that or using a const addItem = then array method?
+
+// const addItem = cart.map()
+// Well, now I'm confused cause I can js do it with the function additem(), buttttttt whatever
+
+// function addItem(obj, target){
+//   for(let i = 0; i < obj.length; i++){
+//       if(obj[i].name === target){
+//         return {...obj[i], qty: obj[i].qty + 1}
+//       }
+//       return obj[i]
+//   }
+//   console.log(obj)
+// }
+
+// // I AM JUST COMPLETELY FUCKING LOST MAN
+
+// while(true) {
+//   userInput = prompt('')
+//   if(userInput === '1') {
+//     viewCart(cart)
+//   } else if (userInput === '2'){
+//     console.log('What food do you wanna add?')
+//     let item = prompt('')
+//     addItem(cart, item)
+//   } else if (userInput === '3'){
+//     console.log('Exiting program...')
+//     break
+//   } else {
+//     console.log('Invalid input, please try again')
+//   }
+// }
+
+// I AM COMPLETELY LOST AND CONFUSED, IM JUST GONNA DO THIS THE EASY WAY
+
+const cart = [
+  { name: "Dog Food", price: 500, qty: 2 },
+  { name: "Cat Toy", price: 150, qty: 1 },
+  { name: "Dog Leash", price: 300, qty: 3 },
+  { name: "Bird Food", price: 100, qty: 10 }
+];
+
+const removeItems = cart.filter(item => item.qty > 0)
+
+const applyDiscount = removeItems.map((item) => {
+  let discount = item.price / 10
+  return {...item, price: item.price - discount}
+})
+
+const totalPrice = applyDiscount.reduce((total, item) => {
+  return total += item.price * item.qty
+}, 0)
+
+// HOPEFULLY, THIS IS CORRECT THOUGH, I LOOKED UP HOW TO GET A 10% DISCOUNT ON A NUMBER ON GOOGLE, THEN THATS IT
+
+
+
+
+// DEBUG:
+
+// Nothing seems to be wron here but are u tryting to make it immutable? Here you go
+// const updated = cart.map(item => {
+//   if (item.name === "Dog Food") {
+//     return {...item, qty: 10}
+//   }
+//   return item;
+// });
+
+// REFLECTION: 
+
+// 1. Since you're directly changing the original object, and you also mentioned to never do mutation
+// 2. Copies the property of that specific item and then changes that specific value
+// 3. I don't actually know. To avoid everything being run at once and not complicate anything? To also do it step-by-step which is the right way?
