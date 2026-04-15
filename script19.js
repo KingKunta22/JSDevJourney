@@ -292,6 +292,93 @@ const cart = [
 // OH WOW, I HOPE THIS IS RIGHT, HEHEHEHEH
 
 
+// // Program 2: Full Cart System (Unguided)
+
+// console.log("FULL CART SYSTEM")
+// console.log("Press 1 to add a new item | Press 2 to remove item | Press 3 to update an item's quantity | Press 4 to get cart total | Press 5 to view cart | Press 6 to exit")
+
+// console.log("Here's your cart: ")
+// console.log(cart)
+
+// let newCart
+
+// // Damn, this is a lot
+
+// // ######## FUNCTIONS ########
+// // Well, I can just copy the functions above but nah, I'll do it all over again
+
+// // addItem
+// function addItem(obj, newItem) {
+//     let addNewItem = obj.map((item) => {
+//         newCart = [...cart,
+//             {...item,
+//                 name: newItem,
+//                 price: 0,
+//                 qty: 1
+//             }
+//         ]
+//         return newCart
+//     })
+// }
+
+// // removeItem
+// function removeItem(obj) {
+//     for(let i = 0; i < obj.length; i++){
+//         console.log((i) + ' if you want to remove ' + obj[i].name)
+//     }
+//     let removeAnItem = prompt('Input the assigned number of the desired item: ')
+    
+// }
+
+
+// // updateQty
+
+// // getTotal
+
+// // viewCart
+
+// function viewCart(obj) {
+//     if(obj === undefined) {
+//         console.log("You haven't updated your cart yet but here's your dummy cart")
+//         console.log(cart)
+//     } else {
+//         console.log("Here's your new cart: ")
+//         console.log(obj)
+//     }
+// }
+
+// while(true) {
+//     let userInput = prompt('Enter a choice: ')
+//     if(userInput === '1'){
+//         let userItem = prompt('Enter an item to add: ')
+//         if(newCart === undefined) {
+//             console.log('First item addition')
+//             addItem(cart, userItem)
+//         } else {
+//             console.log('Not the first item addition')
+//             addItem(newCart, userItem)
+//         }
+//     } else if (userInput === '2') {
+//         removeItem(newCart)
+//     } else if (userInput === '3') {
+        
+//     } else if (userInput === '4') {
+
+//     } else if (userInput === '5') {
+//         viewCart(newCart)
+//     } else if (userInput === '6') {
+//         console.log('Program shutting down...')
+//         break;
+//     } else {
+//         console.log('Invalid input, please try again')
+//     }
+// }
+
+
+// DAMN, LOTS OF BUGGSSSSSSSSS, AND I DONT KNOW WHY THE NEW CART GETS A NEW VALUE OR WHATEVER, IT DOESNT RETAIN THE PREVIOUS INFO OR VALUES HELD
+
+
+
 // Program 2: Full Cart System (Unguided)
 
 console.log("FULL CART SYSTEM")
@@ -302,57 +389,85 @@ console.log(cart)
 
 let newCart
 
-// Damn, this is a lot
-
 // ######## FUNCTIONS ########
-// Well, I can just copy the functions above but nah, I'll do it all over again
-
 // addItem
 function addItem(obj, newItem) {
     let addNewItem = obj.map((item) => {
-        newCart = [...cart,
-            {...item,
-                name: newItem,
-                price: 0,
-                qty: 1
-            }
-        ]
-        console.log('Item added successfully!')
-        return newCart
+        if(newCart === undefined) {
+            console.log('New Cart Undefined')
+            // newCart = [...cart,
+            //     {...item,
+            //         name: newItem,
+            //         price: 0,
+            //         qty: 1
+            //     }
+            // ]
+            return item
+        } else {
+            console.log('New Cart NOT Undefined')
+            // newCart = [...newCart,
+            //     {...item,
+            //         name: newItem,
+            //         price: 0,
+            //         qty: 1
+            //     }
+            // ]
+        }
+        return item
     })
 }
 
 // removeItem
+function removeItem(obj) {
+    for(let i = 0; i < obj.length; i++){
+        console.log((i) + ' if you want to remove ' + obj[i].name)
+    }
+    let removeAnItem = prompt('Input the assigned number of the desired item: ')
+    
+}
+
 
 // updateQty
 
 // getTotal
+function getTotal(obj) {
+    let total = obj.reduce((sum, item) => {
+        return sum += item.price * item.qty
+    }, 0)
+    console.log('Your cart total is:')
+    console.log(total)
+}
 
 // viewCart
-
 function viewCart(obj) {
-    if(obj === undefined) {
-        console.log("You haven't updated your cart yet but here's your dummy cart")
-        console.log(cart)
-    } else {
         console.log("Here's your new cart: ")
         console.log(obj)
-    }
 }
+
+
 
 while(true) {
     let userInput = prompt('Enter a choice: ')
     if(userInput === '1'){
         let userItem = prompt('Enter an item to add: ')
-        addItem(cart, userItem)
+        if(newCart === undefined) {
+            addItem(cart, userItem)
+        } else {
+            addItem(newCart, userItem)
+        }
     } else if (userInput === '2') {
-    
+        removeItem(newCart)
     } else if (userInput === '3') {
         
     } else if (userInput === '4') {
-
+        getTotal(cart)
     } else if (userInput === '5') {
+        if(newCart === undefined) {
+            console.log("You haven't updated your cart yet, but here's your dummy cart")
+            console.log(cart)
+        } else {
         viewCart(newCart)
+        }
     } else if (userInput === '6') {
         console.log('Program shutting down...')
         break;
