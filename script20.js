@@ -34,12 +34,12 @@ const prompt = require('prompt-sync')()
 // Good, working as well as expect :DDDD
 
 
-const cart = [
-  { name: "Dog Food", price: 500, qty: 2 },
-  { name: "Cat Toy", price: 150, qty: 1 },
-  { name: "Dog Leash", price: 300, qty: 3 },
-  { name: "Bird Food", price: 100, qty: 10 }
-];
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
 
 
 // Program 1 (Guided)
@@ -98,15 +98,15 @@ const cart = [
 
 // Perfect, it works properly without having to debug more than 2 times woowowowowow lDDDDDDD
 
-function getTotal(cart){
-    let total = cart.reduce((sum, item) => {
-        return sum + item.qty * item.price
-    }, 0)
-    console.log("The cart's total is: ")
-    console.log(total)
-}
+// function getTotal(cart){
+//     let total = cart.reduce((sum, item) => {
+//         return sum + item.qty * item.price
+//     }, 0)
+//     console.log("The cart's total is: ")
+//     console.log(total)
+// }
 
-getTotal(cart)
+// getTotal(cart)
 
 // Yey, that was so easy but, I DONT LIKE THAT IM NOT HAVING A HARD TIME XDDD, DONT MAKE IT TOO HARD THOUGH ,JUST KEEP IT AVERAGE
 // WHATEVER, I TRUST YOU, DO YOUR THING, IM LEARNING SO IDGAF and im not ocmplaining
@@ -121,13 +121,129 @@ getTotal(cart)
 
 // DEBUGGING
 
-let cart = [
-  { name: "A", price: 10, qty: 1 }
+// let cart = [
+//   { name: "A", price: 10, qty: 1 }
+// ];
+
+// cart = cart.map(item => {
+//   if (item.name === "A") {
+//     return {...item, qty = item.qty + 2}
+//   }
+//   return item
+// });
+
+
+
+
+
+// MEDIUM LEVEL - EXTRA PROGRAM - CAUSE I ASKED FOR A HARDER ONE (I PROLLY IWLL REGRET IT AFTER 5 MINS)
+
+// let userReq = prompt('Change product quantity: ')
+// let userQty = Number(prompt('Enter quantity: '))
+
+// function updateQty(cart, productName, newQty){
+//     let exists = cart.find(item => item.name.toLowerCase() === productName.toLowerCase())
+
+//     if(exists){
+//         cart = cart.map((item) => {
+//             if(item.name.toLowerCase() === productName.toLowerCase()){
+//                 return {...item, qty: newQty}
+//             }
+//             return item
+//         }) 
+//         console.log("Update Successful! Here's your updated cart: ")
+//         console.log(cart)
+//         return cart
+//     } else {
+//         console.log("Unfortunately, we can't find this product")
+//     }
+// }
+
+// updateQty(cart, userReq, userQty)
+
+
+
+// EXTRA EXERCISE (CAUSE I DEMANDED BRUHUHUH)
+
+// const cart = [
+//   { name: "A", price: 10, qty: 1 },
+//   { name: "B", price: 20, qty: 2 }
+// ];
+
+// let total = cart.reduce((sum, item) => {
+//     if(item.qty > 1) {
+//         return sum += item.qty * item.price
+//     }
+// }, 0)
+
+// console.log(total)
+
+// Oh wow, I wonder why it doesn't work
+
+// const cart = [
+//   { name: "A", price: 10, qty: 1 },
+//   { name: "B", price: 20, qty: 2 }
+// ];
+
+// let total = cart.reduce((sum, item) => {
+//     if(item.qty > 1) {
+//         return sum += item.qty * item.price
+//     }
+//     // return item, oh this doesn't work, let me try another one
+//     return sum
+// }, 0)
+
+// console.log(total)
+
+
+// MINI QUIZ:
+
+// 1. That's wrong because it only returns an item which is === 'A', I don't think the user wants that, the perfect method would be filter or find
+
+// 2. All items that has > 1 quantity property, disregards items that are < 1
+
+// 3. If you don't want to have a new array or if you don't want every item in the array or everything in the array :DD
+
+// 4. I think map, because it transforms the items inside the object/array and then returns that same array/obj with the condition, together with all the
+// other items inside the array
+
+
+// SHOULD I DO DAY 20 OR DO I NEED ANOTHER REFRESHER OR WHAT???
+
+
+/// okayyyy, day 19 final bossss
+
+// I ACTUALLY FORGOT TO READ THE RUEOLS THINKING IM JDOING EVERYTHING FINE AND THE USUAL UPDATE QTY XDD, SO THIS TIME ILL FLOOLOWT HE RULES
+
+const cart = [
+  { name: "Dog Food", price: 500, qty: 2 },
+  { name: "Cat Toy", price: 150, qty: 1 },
+  { name: "Dog Leash", price: 300, qty: 3 },
+  { name: "Bird Food", price: 100, qty: 10 }
 ];
 
-cart = cart.map(item => {
-  if (item.name === "A") {
-    return {...item, qty = item.qty + 2}
-  }
-  return item
-});
+let userCash = Number(prompt('Enter your current cash: '))
+
+function checkOut(cart, cash){
+    let total = cart.reduce((sum, item) => {
+        return sum + item.qty * item.price
+    }, 0)
+
+    if(cash < total) {
+        return {
+            error: 'Not enough cash', // Wow, I didn't even know you can do this :D
+            total: total,
+            cash: cash
+        }
+    }
+    let change = cash - total
+    return {
+        total: total,
+        cash: cash,
+        change: change
+    }
+}
+
+checkOut(cart, userCash)
+
+// It's working hehehehe
