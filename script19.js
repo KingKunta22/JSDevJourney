@@ -395,25 +395,23 @@ function addItem(obj, newItem) {
     let addNewItem = obj.map((item) => {
         if(newCart === undefined) {
             console.log('New Cart Undefined')
-            // newCart = [...cart,
-            //     {...item,
-            //         name: newItem,
-            //         price: 0,
-            //         qty: 1
-            //     }
-            // ]
-            return item
+            newCart = [...cart,
+                {...item,
+                    name: newItem,
+                    price: 0,
+                    qty: 1
+                }
+            ]
         } else {
             console.log('New Cart NOT Undefined')
-            // newCart = [...newCart,
-            //     {...item,
-            //         name: newItem,
-            //         price: 0,
-            //         qty: 1
-            //     }
-            // ]
+            newCart = [...newCart,
+                {...item,
+                    name: newItem,
+                    price: 0,
+                    qty: 1
+                }
+            ]
         }
-        return item
     })
 }
 
@@ -422,12 +420,45 @@ function removeItem(obj) {
     for(let i = 0; i < obj.length; i++){
         console.log((i) + ' if you want to remove ' + obj[i].name)
     }
-    let removeAnItem = prompt('Input the assigned number of the desired item: ')
+    let removeAnItem = Number(prompt('Input the assigned number of the desired item: '))
+
+    if((removeAnItem + 1) > obj.length || isNaN(removeAnItem)) {
+        console.log('Invalid Input. Please try again')
+    }
     
+    let remove = newCart.filter((item) => {
+        if(item.name !== obj[removeAnItem].name) {
+            return item
+        }
+    })
+
+    newCart = remove
+    console.log('Successfully removed the item!')
 }
 
 
 // updateQty
+function updateQty(obj, userItem, qty){
+
+    let found = newCart.find((item) => {
+        if(item.name.toLowerCase() === userItem.toLowerCase()){
+            return {...item}
+        }
+    })
+
+    if(found) {
+        let updateCart = obj.map((item) => {
+            if(userItem.toLowerCase() === item.name.toLowerCase()){
+                return item.qty = qty
+            }
+            return item
+        })
+        console.log('Updated item successfully!')
+    } else {
+        console.log('Unfortunately, item not found, please try again.')
+    }
+
+}
 
 // getTotal
 function getTotal(obj) {
@@ -456,8 +487,22 @@ while(true) {
             addItem(newCart, userItem)
         }
     } else if (userInput === '2') {
-        removeItem(newCart)
+        if(newCart === undefined) {
+            console.log("You haven't added any item in the dummy cart yet, please add an item first.")
+        } else {
+            removeItem(newCart)
+        }
+
     } else if (userInput === '3') {
+        if(newCart === undefined) {
+            console.log("You need to add an item first before updating quantity")
+        } else {
+            console.log('Choose which item you wanna update quantity')
+            console.log(newCart)
+            let userChoice = prompt('Enter the name of the item: ')
+            let userQty = Number(prompt('Input how many of this item you would like to have: '))
+            updateQty(newCart, userChoice, userQty)
+        }
         
     } else if (userInput === '4') {
         getTotal(cart)
@@ -475,3 +520,24 @@ while(true) {
         console.log('Invalid input, please try again')
     }
 }
+
+
+
+// I really am fucking confusedf and im falling behind, I need to catch up for like 2 days because I took a break
+// I really don't have any idea how this isn't working :D
+
+// Still working on updateQty, but the addItem and the removeItem is really buggy and its not working properly, im giving up because I have zero idea
+
+// DEBUG:
+// function update(cart) {
+//   return cart.map(item => {
+//     if (item.name === "Dog Food") {
+//       return {...item, qty: 10}
+//     }
+//     return item;
+//   });
+// }
+
+
+// EVERYTHING ELSE SEEMS TO BE WORKING, BUT I JUST CAN'T FIGURE OUT THE ADD ITEM AND REMOVE ITEM, IT JUST OVERRIDES THE NEWCART AND IDK
+// HOW TO RETAIN THE INFORMATION AND THEN USE NEWCART ONTO THE OTHER FUNCTIONS
