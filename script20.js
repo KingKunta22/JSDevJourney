@@ -215,6 +215,203 @@ const prompt = require('prompt-sync')()
 
 // I ACTUALLY FORGOT TO READ THE RUEOLS THINKING IM JDOING EVERYTHING FINE AND THE USUAL UPDATE QTY XDD, SO THIS TIME ILL FLOOLOWT HE RULES
 
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
+
+// let userCash = Number(prompt('Enter your current cash: '))
+
+// function checkOut(cart, cash){
+//     let total = cart.reduce((sum, item) => {
+//         return sum + item.qty * item.price
+//     }, 0)
+
+//     if(cash < total) {
+//         return {
+//             error: 'Not enough cash', // Wow, I didn't even know you can do this :D
+//             total: total,
+//             cash: cash
+//         }
+//     }
+//     let change = cash - total
+//     return {
+//         total: total,
+//         cash: cash,
+//         change: change
+//     }
+// }
+
+// checkOut(cart, userCash)
+
+// It's working hehehehe
+
+
+
+
+
+
+
+
+///// OKAY ILL JUST PUT DAY 20 HERE TO NOT BE CONFUSED ABOUT THE SCRIPT NAMES....
+
+// DAY 20
+
+
+
+
+
+// Exercise 1
+
+function addTax(total) {
+    return total = total * 0.12
+}
+
+// This should be it righttt, yes i think its correct
+
+
+// Exercise 2
+
+function formatCurrency(value) {
+    return '₱' + value + '.00'
+}
+
+// Is that it? I am acctuallyy not sure, let me try it
+
+// console.log(formatCurrency(200))
+
+// It looks like it's working, I might be wrong, but you mentioned string formatting which meanss, thats it.....
+
+
+
+
+// Program 1 (Guided)
+
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
+
+// // Step 1: Add Item
+// let userAdd = prompt('Add a new item: ')
+// function addItem(cart, itemName){
+//     let exists = cart.find(item => item.name.toLowerCase() === itemName.toLowerCase())
+
+//     if(exists) {
+//         cart = cart.map((item) => {
+//             if(item.name.toLowerCase() === itemName.toLowerCase()){
+//                 return {...item, qty: item.qty + 1}
+//             }
+//             return item
+//         })
+//     } else {
+//         cart = {...cart,
+//             name: itemName,
+//             price: 0,
+//             qty: 1
+//         }
+//     }
+//     console.log('Your new and updated cart is:')
+//     console.log(cart)
+//     return cart
+// }
+
+// addItem(cart, userAdd)
+
+// Wait, this one's working, I just don't know how to add a new item on the carttttttt or what the syntax or whatever was on this else statement:
+
+        // cart = {...cart,
+        //     name: itemName,
+        //     price: 0,
+        //     qty: 1
+        // }
+
+// // Step 1: Add Item
+// let userAdd = prompt('Add a new item: ')
+// function addItem(cart, itemName){
+//     let exists = cart.find(item => item.name.toLowerCase() === itemName.toLowerCase())
+
+//     if(exists) {
+//         cart = cart.map((item) => {
+//             if(item.name.toLowerCase() === itemName.toLowerCase()){
+//                 return {...item, qty: item.qty + 1}
+//             }
+//             return item
+//         })
+//     } else {
+//         cart = [...cart, {
+//             name: itemName,
+//             price: 0,
+//             qty: 1
+//             }
+//         ]
+//     }
+//     return cart
+// }
+
+// addItem(cart, userAdd)
+
+// OHHH, I GOT IT NOW, I DONT NEED TO ADD ...item, just that, (I LOOOKED UP THE ADD ITEM FUNCTION I CREATED A WHILE AGO)
+
+
+// // Step 2: Remove Item
+// let userRemove = prompt('Remove an item: ')
+// function removeItem(cart, itemName) {
+//     cart = cart.filter(item => item.name.toLowerCase() !== itemName.toLowerCase())
+//     return cart
+// }
+
+// removeItem(cart, userRemove)
+
+// THIS IS WORKING (I WIL NOT BE ADDING THE CATCH BUG IF INPUT ISN'T FOUND IN THE CART BECAUSE I STILL HAVE ANOTHER PROGRAM TO DO HEHEHE)
+
+// Step 3: Get Total
+// function getTotal(cart){
+//     let total = cart.reduce((sum, item) => {
+//         return sum + item.price * item.qty
+//     }, 0)
+//     return total
+// }
+
+// I WILL NOT BE TESTING BECAUSE IM CONFIDENT THAT THIS IS WORKING
+
+// Step 4: Checkout System
+// let userCash = Number(prompt('Please input your cash: '))
+// function checkout(cart, cash){
+//     let total = cart.reduce((sum, item) => {
+//         return sum + item.price * item.qty
+//     }, 0)
+
+//     if(cash < total) {
+//         return {
+//             error: 'Balance is insufficient',
+//             cash: cash,
+//             total: total
+//         }
+//     }
+    
+//     let change = cash - total
+
+//     return {
+//         cash: cash,
+//         total: total,
+//         change: change
+//     }
+// }
+
+// checkout(cart, userCash)
+
+
+// I HOPE THAT WORKS BECAUSE IT IS BASED OFF OF MEMORY, AND IU DIDNT EVEN CHECK THE ONES YOU DID, I JUST TRIED TO REMEMBER IT AND THEN USE SOME COMMON SENSE
+
+
+
+// Program 2 (Unguided)
+
 const cart = [
   { name: "Dog Food", price: 500, qty: 2 },
   { name: "Cat Toy", price: 150, qty: 1 },
@@ -222,28 +419,80 @@ const cart = [
   { name: "Bird Food", price: 100, qty: 10 }
 ];
 
-let userCash = Number(prompt('Enter your current cash: '))
+// Now, this one's gonna give me a hard time XDDD
 
-function checkOut(cart, cash){
+// let userUpdate = prompt('Enter an item to update: ')
+// let userQty = Number(prompt('Enter the new quantity: '))
+// function updateItem(cart, itemName, newQty) {
+//     let exists = cart.find(item => item.name.toLowerCase() === itemName.toLowerCase())
+
+//     if(!exists) {
+//         return { error: 'Unfortunately, this item does not exist' }
+//     }
+
+//     cart = cart.map((item) => {
+//         if(item.name.toLowerCase() === itemName.toLowerCase()){
+//             return {...item, 
+//                 name: itemName,
+//                 price: 0,
+//                 qty: newQty
+//             }
+//         }
+//         return item
+//     })
+//     return cart
+// }
+
+// updateItem(cart, userUpdate, userQty)
+
+// I assume this is to remove everything on the cart???????
+// function clearCart(cart) {
+//     cart = cart.filter((item) => {
+//         return item.name === 'False value'
+//     })
+//     console.log(cart)
+// }
+
+// clearCart(cart)
+
+// I mean this returns an array with nothing so basically 'cart is cleared'
+// But if you want to just remove all quantity inside the array, then:
+
+// function clearCart(cart){
+//     cart = cart.map((item) => {
+//         return {...item, qty: 0}
+//     })
+//     console.log(cart)
+// }
+
+// clearCart(cart)
+
+let userCash = Number(prompt('Input your cash: '))
+
+function cartSummary(cart, cash) {
+    // Uhm, what do you want me to do with this XDDD, im js gonna do whatever
     let total = cart.reduce((sum, item) => {
         return sum + item.qty * item.price
     }, 0)
 
     if(cash < total) {
         return {
-            error: 'Not enough cash', // Wow, I didn't even know you can do this :D
+            error: 'Insufficient Funds',
+            cash: cash,
             total: total,
-            cash: cash
         }
     }
-    let change = cash - total
+
+    let change = cash - total;
+
+    let totalItems = cart.length
+
     return {
-        total: total,
+        totalItems: totalItems,
         cash: cash,
+        total: total,
         change: change
     }
 }
 
-checkOut(cart, userCash)
-
-// It's working hehehehe
+cartSummary(cart, userCash)
