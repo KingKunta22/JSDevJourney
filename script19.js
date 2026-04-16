@@ -82,14 +82,14 @@
 
 // IM GONNA START OVER DAY 19 OVER HERE
 
-const prompt = require('prompt-sync')()
+// const prompt = require('prompt-sync')()
 
-const cart = [
-  { name: "Dog Food", price: 500, qty: 2 },
-  { name: "Cat Toy", price: 150, qty: 1 },
-  { name: "Dog Leash", price: 300, qty: 3 },
-  { name: "Bird Food", price: 100, qty: 10 }
-];
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
 
 // Exercise 1
 
@@ -379,147 +379,147 @@ const cart = [
 
 
 
-// Program 2: Full Cart System (Unguided)
+// // Program 2: Full Cart System (Unguided)
 
-console.log("FULL CART SYSTEM")
-console.log("Press 1 to add a new item | Press 2 to remove item | Press 3 to update an item's quantity | Press 4 to get cart total | Press 5 to view cart | Press 6 to exit")
+// console.log("FULL CART SYSTEM")
+// console.log("Press 1 to add a new item | Press 2 to remove item | Press 3 to update an item's quantity | Press 4 to get cart total | Press 5 to view cart | Press 6 to exit")
 
-console.log("Here's your cart: ")
-console.log(cart)
+// console.log("Here's your cart: ")
+// console.log(cart)
 
-let newCart
+// let newCart
 
-// ######## FUNCTIONS ########
-// addItem
-function addItem(obj, newItem) {
-    let addNewItem = obj.map((item) => {
-        if(newCart === undefined) {
-            console.log('New Cart Undefined')
-            newCart = [...cart,
-                {...item,
-                    name: newItem,
-                    price: 0,
-                    qty: 1
-                }
-            ]
-        } else {
-            console.log('New Cart NOT Undefined')
-            newCart = [...newCart,
-                {...item,
-                    name: newItem,
-                    price: 0,
-                    qty: 1
-                }
-            ]
-        }
-    })
-}
+// // ######## FUNCTIONS ########
+// // addItem
+// function addItem(obj, newItem) {
+//     let addNewItem = obj.map((item) => {
+//         if(newCart === undefined) {
+//             console.log('New Cart Undefined')
+//             newCart = [...cart,
+//                 {...item,
+//                     name: newItem,
+//                     price: 0,
+//                     qty: 1
+//                 }
+//             ]
+//         } else {
+//             console.log('New Cart NOT Undefined')
+//             newCart = [...newCart,
+//                 {...item,
+//                     name: newItem,
+//                     price: 0,
+//                     qty: 1
+//                 }
+//             ]
+//         }
+//     })
+// }
 
-// removeItem
-function removeItem(obj) {
-    for(let i = 0; i < obj.length; i++){
-        console.log((i) + ' if you want to remove ' + obj[i].name)
-    }
-    let removeAnItem = Number(prompt('Input the assigned number of the desired item: '))
+// // removeItem
+// function removeItem(obj) {
+//     for(let i = 0; i < obj.length; i++){
+//         console.log((i) + ' if you want to remove ' + obj[i].name)
+//     }
+//     let removeAnItem = Number(prompt('Input the assigned number of the desired item: '))
 
-    if((removeAnItem + 1) > obj.length || isNaN(removeAnItem)) {
-        console.log('Invalid Input. Please try again')
-    }
+//     if((removeAnItem + 1) > obj.length || isNaN(removeAnItem)) {
+//         console.log('Invalid Input. Please try again')
+//     }
     
-    let remove = newCart.filter((item) => {
-        if(item.name !== obj[removeAnItem].name) {
-            return item
-        }
-    })
+//     let remove = newCart.filter((item) => {
+//         if(item.name !== obj[removeAnItem].name) {
+//             return item
+//         }
+//     })
 
-    newCart = remove
-    console.log('Successfully removed the item!')
-}
-
-
-// updateQty
-function updateQty(obj, userItem, qty){
-
-    let found = newCart.find((item) => {
-        if(item.name.toLowerCase() === userItem.toLowerCase()){
-            return {...item}
-        }
-    })
-
-    if(found) {
-        let updateCart = obj.map((item) => {
-            if(userItem.toLowerCase() === item.name.toLowerCase()){
-                return item.qty = qty
-            }
-            return item
-        })
-        console.log('Updated item successfully!')
-    } else {
-        console.log('Unfortunately, item not found, please try again.')
-    }
-
-}
-
-// getTotal
-function getTotal(obj) {
-    let total = obj.reduce((sum, item) => {
-        return sum += item.price * item.qty
-    }, 0)
-    console.log('Your cart total is:')
-    console.log(total)
-}
-
-// viewCart
-function viewCart(obj) {
-        console.log("Here's your new cart: ")
-        console.log(obj)
-}
+//     newCart = remove
+//     console.log('Successfully removed the item!')
+// }
 
 
+// // updateQty
+// function updateQty(obj, userItem, qty){
 
-while(true) {
-    let userInput = prompt('Enter a choice: ')
-    if(userInput === '1'){
-        let userItem = prompt('Enter an item to add: ')
-        if(newCart === undefined) {
-            addItem(cart, userItem)
-        } else {
-            addItem(newCart, userItem)
-        }
-    } else if (userInput === '2') {
-        if(newCart === undefined) {
-            console.log("You haven't added any item in the dummy cart yet, please add an item first.")
-        } else {
-            removeItem(newCart)
-        }
+//     let found = newCart.find((item) => {
+//         if(item.name.toLowerCase() === userItem.toLowerCase()){
+//             return {...item}
+//         }
+//     })
 
-    } else if (userInput === '3') {
-        if(newCart === undefined) {
-            console.log("You need to add an item first before updating quantity")
-        } else {
-            console.log('Choose which item you wanna update quantity')
-            console.log(newCart)
-            let userChoice = prompt('Enter the name of the item: ')
-            let userQty = Number(prompt('Input how many of this item you would like to have: '))
-            updateQty(newCart, userChoice, userQty)
-        }
+//     if(found) {
+//         let updateCart = obj.map((item) => {
+//             if(userItem.toLowerCase() === item.name.toLowerCase()){
+//                 return item.qty = qty
+//             }
+//             return item
+//         })
+//         console.log('Updated item successfully!')
+//     } else {
+//         console.log('Unfortunately, item not found, please try again.')
+//     }
+
+// }
+
+// // getTotal
+// function getTotal(obj) {
+//     let total = obj.reduce((sum, item) => {
+//         return sum += item.price * item.qty
+//     }, 0)
+//     console.log('Your cart total is:')
+//     console.log(total)
+// }
+
+// // viewCart
+// function viewCart(obj) {
+//         console.log("Here's your new cart: ")
+//         console.log(obj)
+// }
+
+
+
+// while(true) {
+//     let userInput = prompt('Enter a choice: ')
+//     if(userInput === '1'){
+//         let userItem = prompt('Enter an item to add: ')
+//         if(newCart === undefined) {
+//             addItem(cart, userItem)
+//         } else {
+//             addItem(newCart, userItem)
+//         }
+//     } else if (userInput === '2') {
+//         if(newCart === undefined) {
+//             console.log("You haven't added any item in the dummy cart yet, please add an item first.")
+//         } else {
+//             removeItem(newCart)
+//         }
+
+//     } else if (userInput === '3') {
+//         if(newCart === undefined) {
+//             console.log("You need to add an item first before updating quantity")
+//         } else {
+//             console.log('Choose which item you wanna update quantity')
+//             console.log(newCart)
+//             let userChoice = prompt('Enter the name of the item: ')
+//             let userQty = Number(prompt('Input how many of this item you would like to have: '))
+//             updateQty(newCart, userChoice, userQty)
+//         }
         
-    } else if (userInput === '4') {
-        getTotal(cart)
-    } else if (userInput === '5') {
-        if(newCart === undefined) {
-            console.log("You haven't updated your cart yet, but here's your dummy cart")
-            console.log(cart)
-        } else {
-        viewCart(newCart)
-        }
-    } else if (userInput === '6') {
-        console.log('Program shutting down...')
-        break;
-    } else {
-        console.log('Invalid input, please try again')
-    }
-}
+//     } else if (userInput === '4') {
+//         getTotal(cart)
+//     } else if (userInput === '5') {
+//         if(newCart === undefined) {
+//             console.log("You haven't updated your cart yet, but here's your dummy cart")
+//             console.log(cart)
+//         } else {
+//         viewCart(newCart)
+//         }
+//     } else if (userInput === '6') {
+//         console.log('Program shutting down...')
+//         break;
+//     } else {
+//         console.log('Invalid input, please try again')
+//     }
+// }
 
 
 
@@ -541,3 +541,6 @@ while(true) {
 
 // EVERYTHING ELSE SEEMS TO BE WORKING, BUT I JUST CAN'T FIGURE OUT THE ADD ITEM AND REMOVE ITEM, IT JUST OVERRIDES THE NEWCART AND IDK
 // HOW TO RETAIN THE INFORMATION AND THEN USE NEWCART ONTO THE OTHER FUNCTIONS
+
+
+
