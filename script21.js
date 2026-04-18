@@ -454,7 +454,7 @@ function addItem(cart, newItem){
 
   // I JUST KNOW THIS IS WRONG...
   cart = [...cart, {
-      name: userItem,
+      name: newItem,
       price: 0,
       qty: 1
       }
@@ -570,7 +570,7 @@ function updateItem(cart, targetItem, targetQty){
 
   if(exists){
     const updatedCart = cart.map((item) => {
-      if(item.name.toLowerCase() === userItem.toLowerCase()){
+      if(item.name.toLowerCase() === targetItem.toLowerCase()){
         return {...item, qty: targetQty}
       }
       return item
@@ -606,10 +606,11 @@ function cartEngine(cart, action, payload){
 
 cart = cartEngine(cart, "add", "Dog Food");
 cart = cartEngine(cart, "remove", "Cat Toy");
-cart = cartEngine(cart, "update", { name: "Dog Food", qty: 5 });
+cart = cartEngine(cart, "update", { name: "Dog Food", qty: 10 });
 
 // OKAY, LET ME SEE HOW THIS WORKS...
 
+console.log(cart)
 
 // SEE, IDK WHAT OUTPUT YOU ARE EXPECTING BECAUSE I REALLY DONT KNOW HOW T HIS WORKSSS, IF YOU THINK THS IS THE BEST THEN JUST ELABORATE AND EXPLAIN BRO
 // I HAVE ZEROOOOOOOO IDEA AND IM COMPLETELY LOST
