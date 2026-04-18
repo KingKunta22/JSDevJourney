@@ -189,12 +189,12 @@ const prompt = require('prompt-sync')()
 // functions: applyDiscount, generateReceipt, cartEngine (All should be fixed)
 
 
-const cart = [
-  { name: "Dog Food", price: 500, qty: 2 },
-  { name: "Cat Toy", price: 150, qty: 1 },
-  { name: "Dog Leash", price: 300, qty: 3 },
-  { name: "Bird Food", price: 100, qty: 10 }
-];
+// const cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
 
 // function viewCart(cart) {
 //     return {...cart}
@@ -289,3 +289,327 @@ const cart = [
 // HOW IS THIS RELATED TO APIS XDDDDDDD ITS JUST CONFUSIN EVERYTHING. BUT I MEAN YOURE THE PROFESSOR SO I CANT COMPLAIN
 
 // I JUST REALIZED, I NEED TO CREATE ADD, REMOVE, AND UPDATE............ OMG
+
+
+// OKAY I JS SLEPT THEN RIGHT NOW'S MORNING, LET'S GO DO THIS SHIT:
+
+let cart = [
+  { name: "Dog Food", price: 500, qty: 2 },
+  { name: "Cat Toy", price: 150, qty: 1 },
+  { name: "Dog Leash", price: 300, qty: 3 },
+  { name: "Bird Food", price: 100, qty: 10 }
+];
+
+// // Add Item
+// let userItem = prompt('Enter an item to add: ')
+// function addItem(cart, newItem){
+//   cart = cart.map((item) => {
+//     if(newItem.toLowerCase() === item.name.toLowerCase()) {
+//       return {...item, qty: item.qty + 1}
+//     }
+//     return item
+//   })
+//   console.log(cart)
+//   return cart
+// }
+
+// addItem(cart, userItem)
+// console.log(cart)
+// NGL, I had a few tweaks on this add item part, I still haven't fully mastered it quite yet 
+// but it's fine, as long as I got this right, then should be good
+
+// Yea, I think I got it this time;
+
+// // Add Item
+// let userItem = prompt('Enter an item to add: ')
+// function addItem(cart, newItem){
+//   let exists = cart.find(item => item.name.toLowerCase() === newItem.toLowerCase())
+
+//   if(exists){
+//       cart = cart.map((item) => {
+//       if(newItem.toLowerCase() === item.name.toLowerCase()) {
+//         return {...item, qty: item.qty + 1}
+//       }
+//       return item
+//     })
+//   } else {
+//     // Well, this is wrong... How do I add a new item without doing map here......
+//     // cart = {...item,
+//     //   name: newItem,
+//     //   price: 0,
+//     //   qty: 1
+//     // }
+
+//     // I think this one is?
+//     return {...cart,
+//         name: newItem,
+//         price: 0,
+//         qty: 1
+//     }
+//   }
+  
+//   console.log(cart)
+//   return cart
+// }
+
+// addItem(cart, userItem)
+// console.log(cart)
+// Well, now I'm confused because, why is it that even if I did cart = cart.map()... when I called it after the addItem, it doesn;t change the 
+// original one? like the dog food is still 2 even when I added another dog food by the time I called addItem??????????????
+
+
+// IM SO FUCKING LOST, LET ME START OVER:
+
+// // Add Item
+// let userItem = prompt('Enter an item to add: ')
+// function addItem(cart, newItem){
+//   let exists = cart.find(item => item.name.toLowerCase() === newItem.toLowerCase())
+
+//   if(exists){
+//       cart = cart.map((item) => {
+//       if(newItem.toLowerCase() === item.name.toLowerCase()) {
+//         return {...item, qty: item.qty + 1}
+//       }
+//       return item
+//     })
+//     return cart
+//   }
+
+//   // I JUST KNOW THIS IS WRONG...
+//   cart = [...cart, {
+//       name: userItem,
+//       price: 0,
+//       qty: 1
+//       }
+//   ]
+
+//   return cart
+// }
+
+// console.log(addItem(cart, userItem))
+
+/// OKAY, AFAIK, EVERYTHING'S WRKING HERE, BUT WHY IS IT THAT THE ORIGINAL CART STAYS UNCHANGED?????????????????????
+// IT MIGHT BE BECAUSE I USED [...] THE SPREAD OPERATOR BUTTT HOWWWW WOULD I CHANGE THE ORIGINAL, LET ME TRYY.....
+
+
+// // Add Item
+// let userItem = prompt('Enter an item to add: ')
+// function addItem(cart, newItem){
+//   let exists = cart.find(item => item.name.toLowerCase() === newItem.toLowerCase())
+
+//   if(exists){
+//       cart = cart.map((item) => {
+//       if(newItem.toLowerCase() === item.name.toLowerCase()) {
+//         item.qty += 1
+//         return item
+//       }
+//       return item
+//     })
+//     return cart
+//   }
+
+//   // I JUST KNOW THIS IS WRONG...
+//   cart = cart, {
+//       name: userItem,
+//       price: 0,
+//       qty: 1
+//       }
+
+//   return cart
+// }
+
+// console.log(addItem(cart, userItem))
+// console.log(cart)
+
+// OKAY, NOW IT CHANGED IF ITEM EXISTS, BUT HOW TO ADD AN ITEM WHILST CHANGING THE ORIGINAL?
+
+// OKAY, I LOOKED IT UP, AND I REMEMBERED YOU SAID THAT WE SHOULD NEVER DO MUTABLE OPTION, JUST ALWAYS IMMUTABILITY AND
+// IF IN ANY CASE I HAVE TO CHAMGE OR UPDATE THE ORIGINAL ONE, I SHOULD REASSIGN IT. PLEASE CONFIRM IF IM CORRECT
+
+// I'LL JUST REVERT IT BACK THEN...
+
+
+// addItem(cart, userItem)
+// console.log(cart)
+// Well, now I'm confused because, why is it that even if I did cart = cart.map()... when I called it after the addItem, it doesn;t change the 
+// original one? like the dog food is still 2 even when I added another dog food by the time I called addItem??????????????
+
+
+// IM SO FUCKING LOST, LET ME START OVER:
+
+// Add Item
+// let userItem = prompt('Enter an item to add: ')
+function addItem(cart, newItem){
+  let exists = cart.find(item => item.name.toLowerCase() === newItem.toLowerCase())
+
+  if(exists){
+      cart = cart.map((item) => {
+      if(newItem.toLowerCase() === item.name.toLowerCase()) {
+        return {...item, qty: item.qty + 1}
+      }
+      return item
+    })
+    return cart
+  }
+
+  // I JUST KNOW THIS IS WRONG...
+  cart = [...cart, {
+      name: userItem,
+      price: 0,
+      qty: 1
+      }
+  ]
+
+  return cart
+}
+
+// console.log(addItem(cart, userItem))
+
+
+// THJAT TOOK ME LIKE FUCKING 40-50 MINUTES TO FIGURE ADD ITEM SMFH....
+
+
+// // Remove Item
+// let userRemove = prompt('Enter an item to remove: ')
+// function removeItem(cart, userItem) {
+//   let exists = cart.find(item => item.name.toLowerCase() === userItem.toLowerCase())
+
+//   if(exists) {
+//     cart = cart.map((item) => {
+      
+//       if(item.qty === 1){
+//         cart = cart.filter(item => item.name.toLowerCase() !== userItem.toLowerCase())
+//         return cart
+//       }
+
+//       if(item.name.toLowerCase() === userItem.toLowerCase()){
+//         return {...item, qty: item.qty - 1}
+//       }
+//     })
+//   } else {
+//     return {
+//       error: "Item doesn't exist"
+//     }
+//   }
+
+//   return cart
+// }
+
+// console.log(removeItem(cart, userRemove))
+
+
+// Okay, that took like 3mins...
+// I feel like I need to add some vcalidations or whatever, I need to decrease quantity? or idk, it says remvoe so im removing the entire item
+
+// // Remove Item
+// let userRemove = prompt('Enter an item to remove: ')
+// function removeItem(cart, userItem) {
+//   let exists = cart.find(item => item.name.toLowerCase() === userItem.toLowerCase())
+
+//   if(exists) {
+
+//     cart = cart.map((item) => {
+//       if(item.name.toLowerCase() === userItem.toLowerCase()){
+//         return {...item, qty: item.qty - 1}
+//       }
+//     })
+          
+//     if(cart.userItem.qty === 0){
+//       cart = cart.filter(item => item.name.toLowerCase() !== userItem.toLowerCase())
+//       console.log(cart)
+//     }
+
+//     return cart
+//   } else {
+//     return {
+//       error: "Item doesn't exist"
+//     }
+//   }
+
+//   return cart
+// }
+
+// console.log(removeItem(cart, userRemove))
+
+// OPKAY NOW IM CONFUSED WHEN I TRIED TO ADD A REMOVE THE ITEM ENTIRELY OPTION IF QTY == 0
+
+// SO I LOOKED IT UP, NOW IM KIND OF ENLIGHTENED., AND I KNOW IT WORKS SO.... HERE WE GO
+
+// Remove Item
+// let userRemove = prompt('Enter an item to remove: ')
+function removeItem(cart, userItem) {
+  let exists = cart.find(item => item.name.toLowerCase() === userItem.toLowerCase())
+
+  if(exists) {
+    let updatedCart = cart.map((item) => {
+      if(item.name.toLowerCase() === userItem.toLowerCase()){
+        return {...item, qty: item.qty - 1}
+      }
+      return item
+    })
+
+    updatedCart = updatedCart.filter(item => item.qty > 0)
+
+    return updatedCart
+  } else {
+    return {
+      error: "Item doesn't exist"
+    }
+  }
+}
+
+// console.log(removeItem(cart, userRemove))
+
+
+// Update Item
+
+// let userItem = prompt('Enter the item you want to update: ')
+// let userQty = Number(prompt('Enter your desired quantity for this product: '))
+function updateItem(cart, targetItem, targetQty){
+  let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+
+  if(exists){
+    const updatedCart = cart.map((item) => {
+      if(item.name.toLowerCase() === userItem.toLowerCase()){
+        return {...item, qty: targetQty}
+      }
+      return item
+    })
+    return updatedCart
+  } else {
+    return { error: 'Item not found'}
+  }
+}
+
+// console.log(updateItem(cart, userItem, userQty))
+
+// WOAHH, I GOT THIS UPDATE ITEM FIRST TRY YEY HEHE
+// TIME FOR CART ENGINE
+
+
+function cartEngine(cart, action, payload){
+  if(action === 'add'){
+    return addItem(cart, payload)
+  }
+
+  if (action === 'remove') {
+    return removeItem(cart, payload)
+  }
+
+  if (action === 'update') {
+    return updateItem(cart, payload.name, payload.qty)
+  }
+
+  return cart
+}
+
+
+cart = cartEngine(cart, "add", "Dog Food");
+cart = cartEngine(cart, "remove", "Cat Toy");
+cart = cartEngine(cart, "update", { name: "Dog Food", qty: 5 });
+
+// OKAY, LET ME SEE HOW THIS WORKS...
+
+
+// SEE, IDK WHAT OUTPUT YOU ARE EXPECTING BECAUSE I REALLY DONT KNOW HOW T HIS WORKSSS, IF YOU THINK THS IS THE BEST THEN JUST ELABORATE AND EXPLAIN BRO
+// I HAVE ZEROOOOOOOO IDEA AND IM COMPLETELY LOST
