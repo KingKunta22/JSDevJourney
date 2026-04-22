@@ -92,3 +92,170 @@ let cart = [
 
 // Program 1 (Guided)
 
+// Alright, I actually just rested for another 2 days and boy do I forget everything, but let me try...
+
+
+// function handleRequest(cart, requests) {
+//   for(let i = 0; i < requests.length; i++){
+//     let request = requests[i]
+
+//     // Bro what does this do, I don't even have a cartEngine function... do I need to make one
+//     cart = cartEngine(cart, request.action, request.payload)
+//     // OMG IM SO FUCKING LOST, I MIGHT NEED A REFRESHER IQNTOQWRPL;
+
+//   }
+
+//   return cart
+
+// }
+
+// let userRequests = [
+//   { action: "add", payload: "Dog Food" },
+//   { action: "remove", payload: "Cat Toy" },
+//   { action: "update", payload: { name: "Dog Food", qty: 5 } }
+// ]
+
+// console.log(handleRequest(cart, userRequests))
+
+// Oh okay, so you gave me an idea to create add, remove, and update functions inside the cart engine... so let me try it
+
+// Oh okay, no I remember, I think I need to create 3 more functions above this (cart engine function): add, remove, and update, 
+// then call each function inside the cart
+// engine based on the action right??????????????????
+
+// Okay, let me also see if I can still do the big 3 (add, remove, update) T-T
+function add(cart, targetItem) {
+  let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+
+  if(exists){
+    cart = cart.map((item) => {
+      if(item.name.toLowerCase() === targetItem.toLowerCase()){
+        return {...item, qty: item.qty + 1}
+      }
+      return item
+    })
+    return cart
+  } else {
+    cart = [...cart,
+      {
+        name: targetItem,
+        price: 0,
+        qty: 1
+      }
+    ]
+    return cart
+  }
+}
+
+// Okay, let me try the add:
+// console.log(add(cart, 'Dog cat'))
+// Okay, it's working first try YEYYYYYYYYYYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+function remove(cart, targetItem) {
+  let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+
+  if(exists) {
+     cart = cart.map((item) => {
+      if(item.name.toLowerCase() === targetItem.toLowerCase()){
+        return {...item, qty: item.qty - 1}
+      }
+      // I know this is different and might be wrong, but let mee try...
+      // return item.qty != 0
+      // Oh, this returns a boolean value, let me try to fix it...
+      // if(item.qty != 0) {
+      //   return item
+      // }
+      // That didn't do its job so let me fix it...
+      return item
+     })
+     // Hopefully, this works....
+     let updatedCart = cart.filter(item => item.qty != 0)
+     return updatedCart
+  } else {
+    return {error: 'Item not found'}
+  }
+}
+// GREAT, IT NOW WORKS HEHEHEHE (2ND-3RD ATTEMPT T-T)
+// console.log(remove(cart, 'Dog Food'))
+
+function update(cart, targetItem, targetQty){
+  if(isNaN(targetQty)){
+    return {error: 'Invalid input'}
+  }
+  let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+
+  if(exists){
+    cart = cart.map((item) => {
+      if(item.name.toLowerCase() === targetItem.toLowerCase()){
+        return {...item, qty: targetQty}
+      }
+      return item
+    })
+    return cart
+  } else {
+    return {error: 'Item does not exist in the cart'}
+  }
+}
+
+//Alright, let me try, im a bit confident i can do this first try...
+// console.log(update(cart, 'Cat Toy', 50))
+// Well, the
+  // if(isNaN(targetQty)){
+  //   return {error: 'Invalid input'}
+  // }
+// Doesn't really do its job and idk why but whatever...
+
+// Alrght, so I finished 3 functions and crud, I should be able to do the cartEngine now, I believe the first part is the data layer,
+// Second layer is I forgot, let me check: OH RIGHT, DATA LAYER, ENGINE, THEN HANDLEREQUEST OKAY.....
+
+// Okay, engine layer, first try, let me see...
+function cartEngine(cart, action, payload) {
+  if(action === 'add'){
+    return add(cart, payload)
+  } else if(action === 'remove'){
+    return remove(cart, payload)
+  } else if(action === 'update'){
+    return update(cart, payload.name, payload.qty)
+  } else {
+    return {error: 'Invalid inputs'}
+  }
+}
+
+// let results = cartEngine(cart, 'add', 'Dog Food')
+// let results = cartEngine(cart, 'remove', 'Cat Toy')
+// Okay, both works properly, now the part that I think is a bit tricky is the udpate...
+// Okay, I'm trying it out for the update and it's wrong, but i think it's the syntax that's wrong here..
+// let results = cartEngine(cart, 'update', {name: 'Cat Toy', qty: 35})
+// // Okay, now its working, cause I looked it up XDDDDD
+// console.log(results)
+
+// Alright, engine layer finalized and working, time to do the hardest challenge or the boss one
+
+
+let userRequests = [
+  { action: "add", payload: "Dog Food" },
+  { action: "remove", payload: "Cat Toy" },
+  { action: "update", payload: { name: "Dog Food", qty: 5 } }
+]
+
+function handleRequest(cart, requests) {
+  for(let i = 0; i < requests.length; i++){
+    let request = requests[i]
+    cart = cartEngine(cart, request.action, request.payload)
+  }
+  return cart
+}
+
+console.log(handleRequest(cart, userRequests))
+// OKAY, I CAN TELL THAT IT IS WORKING (I MEAN I KEPT LOOKING UP YOUR CODES AND GUIDELINESS SOOO)
+// OKAY SO EVERYTHING IS KINDA STEP BY STEP BUT IT HAPPENS IN BACKEND SO I ONYL GET 1 RESULT WHICH IS THE RESULT AFTER ALL THE STEPS
+// HERES THE RESULTS:
+
+// PS C:\Users\Leonard\Documents\PERSONAL\Codes\JSTest> node ./script23.js
+// [
+//   { name: 'Dog Food', price: 500, qty: 5 },
+//   { name: 'Dog Leash', price: 300, qty: 3 },
+//   { name: 'Bird Food', price: 100, qty: 10 }
+// ]
+
+// So that's owkringggg...... wowowowowoowowowowoww
