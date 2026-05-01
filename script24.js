@@ -75,12 +75,12 @@
 
 // SYSTEM REBUILDING
 
-let cart = [
-  { name: "Dog Food", price: 500, qty: 2 },
-  { name: "Cat Toy", price: 150, qty: 1 },
-  { name: "Dog Leash", price: 300, qty: 3 },
-  { name: "Bird Food", price: 100, qty: 10 }
-];
+// let cart = [
+//   { name: "Dog Food", price: 500, qty: 2 },
+//   { name: "Cat Toy", price: 150, qty: 1 },
+//   { name: "Dog Leash", price: 300, qty: 3 },
+//   { name: "Bird Food", price: 100, qty: 10 }
+// ];
 
 
 // Data Functions (DATA LAYER I BELIEVE)
@@ -170,33 +170,93 @@ function update(cart, targetItem, targetQty){
     }
 }
 
-console.log(update(cart, 'Dog Food', 25))
-
+// console.log(update(cart, 'Dog Food', 25))
 // YEY, WORKING FIRST TRY, NO DEBUGGING NEEDEDDDD B)
 
 
 // ENGINE LAYER
 
-function cartEngine(cart, action, payload){
-    if(action === 'add'){
-        return add(cart, payload)
-    } else if(action === 'remove'){
-        return remove(cart, payload)
-    } else if(action === 'update'){
-        return update(cart, payload.name, payload.qty)
-    } else {
-        return {error: 'Action not specified'}
-    }
-}
+// function cartEngine(cart, action, payload){
+//     if(action === 'add'){
+//         return add(cart, payload)
+//     } else if(action === 'remove'){
+//         return remove(cart, payload)
+//     } else if(action === 'update'){
+//         return update(cart, payload.name, payload.qty)
+//     } else {
+//         return {error: 'Action not specified'}
+//     }
+// }
 
 // AFAI CAN REMEMBER, THATS HOW IT LOOKS LIKE XDDDD
 
 
 // HANDLER (LOOP / CONTROLLER)
 
-function handleRequest(cart, requests){
+// function handleRequest(cart, requests){
 
-}
+// }
 
 // WOAH, OKAY, I JUST REALIZED I HAD TO CHANGE THE CART ENGINE AND THE HANDLER... LET ME REDO IT BNASED FROM YOUR CODE...
 
+// (NEW) ENGINE LAYER
+
+function cartEngine(cart, action, payload){
+    if(action === 'add'){
+        // On this part, why not same with the remove one? Adding something like this:
+        // let result = add(cart, payload)
+        // if(result.error) return { status: 'error', message: result.error}
+        return {status: 'success', data: add(cart, payload)}
+    } 
+
+    if(action === 'remove'){
+        let result = remove(cart, payload)
+        if(result.error) return {status: 'error', message: result.error}
+        return {status: 'success', data: result}
+    }
+
+    if(action === 'update'){
+        let result = update(cart, payload.name, payload.qty)
+        if(result.error) return {status: 'error', message: result.error}
+        return {status: 'success', data: result}
+    }
+
+    return {status: 'error', message: 'Invalid Action'}
+}
+
+// Now, I kinda understand how this works now, it just simplifies everything and adds a new feature where it shows an error
+// The next one (handle request) is where I dont udnerstand as much...
+
+// HANDLER
+
+function handleRequest(cart, requests){
+    for(let req of requests){ // Question, is this the same as foreach? like using foreach(items as item??)????
+
+        let result = cartEngine(cart, req.action, req.payload)
+
+        if(result.status === 'success'){
+            cart = result.data
+        } else {
+            console.log('Error:', result.message)
+        }
+    } 
+    return cart
+}
+
+// YEP, I AM LOST AND CONFUSED ON THAT PART...
+
+// Let me try it though...
+
+let cart = [
+  { name: "Dog Food", price: 500, qty: 2 }
+]
+
+let requests = [
+  { action: "add", payload: "Dog Food" },
+  { action: "update", payload: { name: "Dog Food", qty: 5 } },
+  { action: "remove", payload: "Dog Food" }
+]
+
+console.log(handleRequest(cart, requests))
+// WOW, ITS WORKING, BUT I NEED SOME KIND OF CLARIFICATION ABOUT WHAT HAPPENED SPECIALLY ON THE HANDLER REQUEST PART, BUT WHATEVER,
+// THE MORE I DO IT , THE MORE I SHOULD UNDERSTAND IT....
