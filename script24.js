@@ -355,7 +355,13 @@ function handleRequest(cart, requests){
         let result = cartEngine(cart, req.action, req.payload)
 
         if(result.status === 'success'){
-            cart = result.data
+            
+            if(Array.isArray(result.data)) { // Wtf does this array.isarray do? Does it check if the results.data is array?
+                cart = result.data
+            } else {
+                console.log(result.data)
+            }
+            
         } else {
             console.log('Error:', result.message)
         }
