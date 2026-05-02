@@ -214,6 +214,171 @@ function clear(cart){
 // worked right??? Let me fix most of it by copying and pasting the thing I did above but this time with the fixes (so u can see the progress)
 
 
+// // CLI CART SYSTEM - ENGINE
+// function cartEngine(cart, action, payload){
+
+//     if(action === 'add'){
+//         return add(cart, payload)
+//     }
+
+//     if(action === 'remove'){
+//         return remove(cart, payload)
+//     }
+
+//     if(action === 'update'){
+//         return update(cart, payload.name, payload.qty)
+//     }
+
+//     if(action === 'total'){
+//         return total(cart)
+//     }
+
+//     if(action === 'clear'){
+//         return clear(cart)
+//     }
+
+//     // if(action === 'exit'){
+
+//     // }
+
+//     return {error: 'Invalid action'}
+// }
+
+
+// // CLI CART SYSTEM - HANDLER
+
+// let running = true
+
+// while(running){
+//     console.log("\n=== CLI SYSTEM ===")
+//     console.log("1. View Cart")
+//     console.log("2. Add Item")
+//     console.log("3. Remove Item")
+//     console.log("4. Update Item")
+//     console.log("5. Get Total")
+//     console.log("6. Clear Cart")
+//     console.log("7. Exit")
+//     let userInput = prompt("Choose: ")
+
+//     if(userInput === '1'){
+//         console.log(cart)
+//     }
+
+//     if(userInput === '2'){
+//         let item = prompt('Add Item: ')
+//         // let price = Number(prompt('Input Price: ')) // I think this is misplaced, I need to put it on the data function
+//         cart = cartEngine(cart, 'add', item)
+//     }
+
+//     if(userInput === '3'){
+//         let item = prompt('Remove item: ')
+//         cart = cartEngine(cart, 'remove', item)
+//     }
+
+//     if(userInput === '4'){
+//         let name = prompt('Update an item: ')
+//         let qty = Number(prompt('Enter quantity: '))
+//         // cart = cartEngine(cart, 'update', payload: {item: name, qty: qty}) // Okay, I am kinda confused here and I am quite certain this is one of the problem
+//         // cart = cartEngine(cart, 'update', name, qty) 
+//         // console.log(cartEngine(cart, 'update', {item: item, qty: qty}))
+//         // cart = cartEngine(cart, 'update', {item: item, qty: qty}) // BRUHHHH, THIS HSOUDL BE CORRECT, CUS THIS IS HOW IT SHOULD BE BASED FROM THE PREV STUFF
+//         cart = cartEngine(cart, 'update', {name, qty})
+//         // Hol up, that's working, how did that took me like 30 minutes to figure outttttt, I actually looked up your code XDDD
+//     }
+
+//     if(userInput === '5'){
+//         console.log(cartEngine(cart, 'total'))
+//     }
+
+//     if(userInput === '6'){
+//         // console.log(cartEngine(cart, 'clear')) I actually checked your previous stuff again, the code you added, and I didn;t know how I used console
+//         // instead of just returning cart = cartEngine here, am I that stupid wowwww, my bad for looking up your code instead of figuring it out by myself
+//         // This took me and tried it for like 10mins thoughX DDD
+//         cart = cartEngine(cart, 'clear')
+//     }
+    
+//     if(userInput === '7'){
+//         running = false
+//         console.log('Goodbye!')
+//     }
+// }
+
+// Okay, new errors, the add, remove, total, and exit functions are perfectly working (AFAIK...)
+// However, the problems are in the two functioms: clear and update
+// When I update an item, it doesnt work and returns an error that doesn't even give me the reason why its not working
+// And when I clear, it just returns [], but when I view cart, it shows the cart that nothing changed... and not even cleared
+
+
+// Actually, i tried looking up your code and the update issue is fixed, not the claer is the only thing thats not working fully
+
+// Okay both of those are fixed after looking up your code, i found new ones:
+
+// 1. Remove item replaces the cart to the error object instead of showing it as an error and keeping the cart... It happens if I try to add
+// --- an item that does not exist...
+                // Choose: 1
+                // { error: 'Item does not exist' }
+
+// 2. Same with update item, instead of just showing the error, it replaces the cart as an error instead of just showing it
+
+// I think both of those have something to do with the cart system, not the cart engine... It should stop from doing cart = cartEngine if an error occurs...
+
+// So let me try to rewrite the cart system handler...
+
+
+// // CLI CART SYSTEM - HANDLER
+
+// let running = true
+
+// while(running){
+//     console.log("\n=== CLI SYSTEM ===")
+//     console.log("1. View Cart")
+//     console.log("2. Add Item")
+//     console.log("3. Remove Item")
+//     console.log("4. Update Item")
+//     console.log("5. Get Total")
+//     console.log("6. Clear Cart")
+//     console.log("7. Exit")
+//     let userInput = prompt("Choose: ")
+
+//     if(userInput === '1'){
+//         console.log(cart)
+//     }
+
+//     if(userInput === '2'){
+//         let item = prompt('Add Item: ')
+//         cart = cartEngine(cart, 'add', item)
+//     }
+
+//     if(userInput === '3'){
+//         let item = prompt('Remove item: ')
+//         // cartEngine(cart, 'remove', item)
+//         // if(error) {console.log('This has errorsss')}
+//         // console.log('Success!') // Let me see if this debug stuff works XDDDD -> IT DIDNT XDDD
+//         // Okay, so this is all wrong, I shouldn't be doing this here, I should be doiung this on the cart engine...
+//         cart = cartEngine(cart, 'remove', item)
+//     }
+
+//     if(userInput === '4'){
+//         let name = prompt('Update an item: ')
+//         let qty = Number(prompt('Enter quantity: '))
+//         cart = cartEngine(cart, 'update', {name, qty})
+//     }
+
+//     if(userInput === '5'){
+//         console.log(cartEngine(cart, 'total'))
+//     }
+
+//     if(userInput === '6'){
+//         cart = cartEngine(cart, 'clear')
+//     }
+    
+//     if(userInput === '7'){
+//         running = false
+//         console.log('Goodbye!')
+//     }
+// }
+
+
 // CLI CART SYSTEM - ENGINE
 function cartEngine(cart, action, payload){
 
@@ -222,10 +387,14 @@ function cartEngine(cart, action, payload){
     }
 
     if(action === 'remove'){
+        let results = remove(cart, payload)
+        if(results.error) {console.log(results.error); return cart}
         return remove(cart, payload)
     }
 
     if(action === 'update'){
+        let results = update(cart, payload.name, payload.qty)
+        if(results.error) {console.log(results.error); return cart}
         return update(cart, payload.name, payload.qty)
     }
 
@@ -266,7 +435,6 @@ while(running){
 
     if(userInput === '2'){
         let item = prompt('Add Item: ')
-        // let price = Number(prompt('Input Price: ')) // I think this is misplaced, I need to put it on the data function
         cart = cartEngine(cart, 'add', item)
     }
 
@@ -276,12 +444,9 @@ while(running){
     }
 
     if(userInput === '4'){
-        let item = prompt('Update an item: ')
+        let name = prompt('Update an item: ')
         let qty = Number(prompt('Enter quantity: '))
-        // cart = cartEngine(cart, 'update', payload: {item: name, qty: qty}) // Okay, I am kinda confused here and I am quite certain this is one of the problem
-        // cart = cartEngine(cart, 'update', name, qty) 
-        console.log(cartEngine(cart, 'update', {item: item, qty: qty}))
-        cart = cartEngine(cart, 'update', {item: item, qty: qty}) // BRUHHHH, THIS HSOUDL BE CORRECT, CUS THIS IS HOW IT SHOULD BE BASED FROM THE PREV STUFF
+        cart = cartEngine(cart, 'update', {name, qty})
     }
 
     if(userInput === '5'){
@@ -289,7 +454,7 @@ while(running){
     }
 
     if(userInput === '6'){
-        console.log(cartEngine(cart, 'clear'))
+        cart = cartEngine(cart, 'clear')
     }
     
     if(userInput === '7'){
@@ -298,7 +463,6 @@ while(running){
     }
 }
 
-// Okay, new errors, the add, remove, total, and exit functions are perfectly working (AFAIK...)
-// However, the problems are in the two functioms: clear and update
-// When I update an item, it doesnt work and returns an error that doesn't even give me the reason why its not working
-// And when I clear, it just returns [], but when I view cart, it shows the cart that nothing changed... and not even cleared
+
+// OKAY, WELL, I KINDA FIXED IT, ITS NOT THE BEST, BUT ITS WORKING, I BELIEVE, WAIT LET ME TRY EVERYTHIGN AGAIN....
+// OKAY, EVERYTHINGS WORKING, TIME TO DIEEEIQWUBTNROIKQMJPRTQWLRQWR IOEZIEZZEZEZEZEZE WOWOWOOWOWWO=
