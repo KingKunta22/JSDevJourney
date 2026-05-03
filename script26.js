@@ -300,7 +300,7 @@ function remove(cart, targetItem){
         // console.log('not the item to remove')
         return item
     })
-    updatedCart = cart.filter(item => item.qty > 0)
+    updatedCart = updatedCart.filter(item => item.qty > 0)
     return updatedCart
 }
 
@@ -316,7 +316,9 @@ function renderCart(){
         list.appendChild(li)
 
         newBtn.addEventListener('click', () => {
-            cart = remove(cart, item)
+            cart = remove(cart, item.name)
+            renderCart() // So, on this part, I didn't try this because its inside the render cart function
+            // already, and i didnt know how it would work if the function is called inside its own function
         })
 
     })
