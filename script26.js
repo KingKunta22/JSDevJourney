@@ -349,8 +349,16 @@ function totalItems(cart){
     return total
 }
 
+// Okay, before I do this, I need to have an input for price...
+function totalPrice(cart){
+    let total = cart.reduce((sum, item) => {
+        sum + item.price * item.qty
+    })
+}
+
 const getTotalBtn = document.getElementById('getTotal')
-const total = document.getElementById('total')
+const totalItems = document.getElementById('totalItems')
+const getTotalPriceBtn = document.getElementById('getTotalPrice')
 
 // getTotal.addEventListener('click', () => {
 //     let total = document.createElement('h1')
@@ -362,7 +370,11 @@ const total = document.getElementById('total')
 // manually creating it through js)
 
 getTotalBtn.addEventListener('click', () => {
-    total.textContent = totalItems(cart)
+    totalItems.textContent = totalItems(cart)
 })
 
 // Perfectly WORKINGGGG, its just the remove and the update that im stuck with....
+
+getTotalPriceBtn.addEventListener('click', () => {
+
+})
