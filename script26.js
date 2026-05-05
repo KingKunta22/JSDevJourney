@@ -440,6 +440,8 @@ function getTotalPrice(cart){
     let total = cart.reduce((sum, item) => {
         return sum + item.price * item.qty
     }, 0)
+    
+    return total
 }
 
 function clearCart(cart) {
@@ -521,4 +523,18 @@ addBtn.addEventListener('click', () => {
 
 // Okay, moving on to other event listeners
 
-clearCart.addEventListener('click')
+getItems.addEventListener('click', () => {
+    const totalItemUI = document.getElementById('totalItems')
+    totalItemUI.textContent = getTotalItems(cart)
+})
+
+getPrice.addEventListener('click', () => {
+    const totalPriceUI = document.getElementById('totalPrice')
+    totalPriceUI.textContent = getTotalPrice(cart)
+})
+
+// Woah, you cant name a variable which has same name as a function??
+clear.addEventListener('click', () => {
+    cart = clearCart(cart)
+    renderCart()
+})
