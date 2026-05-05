@@ -255,9 +255,138 @@
 
 // Okay, let me try a diff approach: 
 
+// let cart = []
+
+// function add(cart, targetItem){
+//     let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+
+//     if(exists){
+//         cart = cart.map(item => {
+//             if(item.name.toLowerCase() === targetItem.toLowerCase()){
+//                 return {...item, qty: item.qty + 1}
+//             }
+//             return item
+//         })
+//         return cart
+//     }
+
+//     return [...cart, { name: targetItem, qty: 1 }]
+// }
+
+// const input = document.querySelector('#itemInput')
+// const button = document.getElementById('addBtn')
+// const list = document.querySelector('#cartList')
+
+// button.addEventListener('click', () => {
+//     const item = input.value
+
+//     if(!item.match(/^[a-zA-Z]+(\s{1}[a-zA-Z]+)*$/)) { 
+//         alert('Invalid Input');
+//         return
+//     }
+
+//     cart = add(cart, item)
+//     renderCart()
+// })
+
+// function remove(cart, targetItem){
+//     // console.log('remove function called')
+//     let updatedCart = cart.map(item => {
+//         // if(item.name.toLowerCase() === targetItem.toLowerCase()){ // Bruh, there's nothing wrong with thisss
+//         if(item.name === targetItem){
+//             // console.log('found the item to remove')
+//             return {...item, qty: item.qty - 1}
+//         }
+//         // console.log('not the item to remove')
+//         return item
+//     })
+//     updatedCart = updatedCart.filter(item => item.qty > 0)
+//     return updatedCart
+// }
+
+// function renderCart(){
+//     list.innerHTML = ''
+
+//     cart.forEach(item => {
+//         const li = document.createElement('li')
+//         li.textContent = `${item.name} - Qty: ${item.qty} `
+//         const newBtn = document.createElement('button')
+//         newBtn.textContent = 'x'
+//         li.appendChild(newBtn)
+//         list.appendChild(li)
+
+//         newBtn.addEventListener('click', () => {
+//             cart = remove(cart, item.name)
+//             renderCart() // So, on this part, I didn't try this because its inside the render cart function
+//             // already, and i didnt know how it would work if the function is called inside its own function
+//         })
+
+//     })
+// }
+
+// // Okay, its now adding newBtn to each item but it still doesnt function properly
+// // Okay, its now silently failing buttt idk why adding .toLowerCase() fucks up everything
+
+// // And also, I believe I need to assign id per item doing osmething like newBtn.id = item[i].name or wtv
+
+// // But idk how to do that, foreach really is the key but idk how it workss completely unlike the map stuffs i did
+
+// // I'll try doing the total part because update seems to be a lot more complicted
+// // function totalItems(cart){
+// //     for(i = 0; i < cart.length; i++){
+// //         i++
+// //     }
+// //     let total = i + 1
+// //     return total
+// // }
+// // That's wrong because I forgot I nheed to consider the qty
+
+// function totalItems(cart){
+//     let total = cart.reduce((sum, item) => {
+//         return sum + item.qty
+//     }, 0)
+
+//     return total
+// }
+
+// // Okay, before I do this, I need to have an input for price...
+// function totalPrice(cart){
+//     let total = cart.reduce((sum, item) => {
+//         sum + item.price * item.qty
+//     })
+// }
+
+// const getTotalBtn = document.getElementById('getTotal')
+// const totalItems = document.getElementById('totalItems')
+// const getTotalPriceBtn = document.getElementById('getTotalPrice')
+
+// // getTotal.addEventListener('click', () => {
+// //     let total = document.createElement('h1')
+// //     total.textContent = totalItems(cart)
+// //     getTotal.appendChild(total)
+// // })
+
+// // That's too complicated, let me try a different approach (adding new button and new h1 with span instead of
+// // manually creating it through js)
+
+// getTotalBtn.addEventListener('click', () => {
+//     totalItems.textContent = totalItems(cart)
+// })
+
+// // Perfectly WORKINGGGG, its just the remove and the update that im stuck with....
+
+// getTotalPriceBtn.addEventListener('click', () => {
+
+// })
+
+
+// Shii, I have to rename lots of names so I'll just redo everything below with proper naming conventions
+// so that I don't get too confused
+
+
 let cart = []
 
-function add(cart, targetItem){
+function add(cart, targetItem, targetPrice){
     let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
 
     if(exists){
@@ -268,80 +397,38 @@ function add(cart, targetItem){
             return item
         })
         return cart
+    } else {
+        return [...cart, {
+            name: targetItem,
+            price: targetPrice,
+            qty: 1
+        }]
     }
-
-    return [...cart, { name: targetItem, qty: 1 }]
+    // renderCart() --- I almost added this, I checked it again and I didn;t have to
+    // I think because I need to call it everytime a button is clicked instead of inside the functions..
 }
 
-const input = document.querySelector('#itemInput')
-const button = document.getElementById('addBtn')
-const list = document.querySelector('#cartList')
-
-button.addEventListener('click', () => {
-    const item = input.value
-
-    if(!item.match(/^[a-zA-Z]+(\s{1}[a-zA-Z]+)*$/)) { 
-        alert('Invalid Input');
-        return
-    }
-
-    cart = add(cart, item)
-    renderCart()
-})
+// So I just updated the add function to accept price in order for me to use the price input
 
 function remove(cart, targetItem){
-    // console.log('remove function called')
-    let updatedCart = cart.map(item => {
-        // if(item.name.toLowerCase() === targetItem.toLowerCase()){ // Bruh, there's nothing wrong with thisss
-        if(item.name === targetItem){
-            // console.log('found the item to remove')
-            return {...item, qty: item.qty - 1}
-        }
-        // console.log('not the item to remove')
-        return item
-    })
-    updatedCart = updatedCart.filter(item => item.qty > 0)
-    return updatedCart
-}
+    let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
 
-function renderCart(){
-    list.innerHTML = ''
-
-    cart.forEach(item => {
-        const li = document.createElement('li')
-        li.textContent = `${item.name} - Qty: ${item.qty} `
-        const newBtn = document.createElement('button')
-        newBtn.textContent = 'x'
-        li.appendChild(newBtn)
-        list.appendChild(li)
-
-        newBtn.addEventListener('click', () => {
-            cart = remove(cart, item.name)
-            renderCart() // So, on this part, I didn't try this because its inside the render cart function
-            // already, and i didnt know how it would work if the function is called inside its own function
+    if(exists){
+        cart = cart.map(item => {
+            if(item.name.toLowerCase() === targetItem.toLowerCase()){
+                return {...item, qty: item.qty - 1}
+            }
+            return item
         })
 
-    })
+        let updatedCart = cart.filter(item => item.qty > 0)
+
+        return updatedCart
+    }
 }
+// Hopefully, remove function is working even with the .toLowerCase() because I wanna make it case insensitive
 
-// Okay, its now adding newBtn to each item but it still doesnt function properly
-// Okay, its now silently failing buttt idk why adding .toLowerCase() fucks up everything
-
-// And also, I believe I need to assign id per item doing osmething like newBtn.id = item[i].name or wtv
-
-// But idk how to do that, foreach really is the key but idk how it workss completely unlike the map stuffs i did
-
-// I'll try doing the total part because update seems to be a lot more complicted
-// function totalItems(cart){
-//     for(i = 0; i < cart.length; i++){
-//         i++
-//     }
-//     let total = i + 1
-//     return total
-// }
-// That's wrong because I forgot I nheed to consider the qty
-
-function totalItems(cart){
+function getTotalItems(cart){
     let total = cart.reduce((sum, item) => {
         return sum + item.qty
     }, 0)
@@ -349,32 +436,89 @@ function totalItems(cart){
     return total
 }
 
-// Okay, before I do this, I need to have an input for price...
-function totalPrice(cart){
+function getTotalPrice(cart){
     let total = cart.reduce((sum, item) => {
-        sum + item.price * item.qty
+        return sum + item.price * item.qty
+    }, 0)
+}
+
+function clearCart(cart) {
+    return [] // Hopefully, this is right as well XDDD
+}
+
+let itemName = document.getElementById('itemInput')
+let itemPrice = document.getElementById('itemPrice')
+
+let cartContainer = document.getElementById('cartList')
+
+let addBtn = document.getElementById('addBtn')
+let getItems = document.getElementById('getItems')
+let getPrice = document.getElementById('getPrice')
+
+let clear = document.getElementById('clearCart')
+
+// So afaik, this is the function that renders it to the UI, basically the holder for everything
+// that's going on in backend to show it to frontend right?
+function renderCart(){
+    cartList.innerHTML = '' // So, diudn't know this is actually useful, how does this work and how does it
+    // even like update the ui without stacking the same ones on top of each other? Like what does this mean?
+
+    cart.forEach(item => {
+        const li = document.createElement('li')
+        li.textContent = `${item.name} - Qty: ${item.qty} - Price: ${item.price} ` 
+        // I am actualyl confused on this line, shouldn't I be using itemName.value?
+        const newBtn = document.createElement('button')
+        newBtn.textContent = 'X'
+        li.appendChild(newBtn)
+        cartList.appendChild(li)
+
+        newBtn.addEventListener('click', () => {
+            cart = remove(cart, item.name)
+            renderCart()
+        })
+        // So I just encountered the same bug that I had (the .toLowerCase bug)
+        // Okay perfect, I used the item.name method, so basically it just gets the name of the item if
+        // found and then gets that item name's entire object node and then removes it where it belongs?
+        // So if I do like remove the items that have qty = 2, then i can just call
+        // remove(cart, item.qty) and then do some few tweaks on the remove function? and itll work?
     })
 }
 
-const getTotalBtn = document.getElementById('getTotal')
-const totalItems = document.getElementById('totalItems')
-const getTotalPriceBtn = document.getElementById('getTotalPrice')
+// Oh, I need to add event listeners too...
 
-// getTotal.addEventListener('click', () => {
-//     let total = document.createElement('h1')
-//     total.textContent = totalItems(cart)
-//     getTotal.appendChild(total)
-// })
+addBtn.addEventListener('click', () => {
+    // Why am I doing this?
+    const item = itemName.value
+    const price = itemPrice.value
 
-// That's too complicated, let me try a different approach (adding new button and new h1 with span instead of
-// manually creating it through js)
+    // So I copied this, this makes sure it has valid name (no unnecessary spaces and special chars)
+    if(!item.match(/^[a-zA-Z]+(\s{1}[a-zA-Z]+)*$/) || !price.match(/^\d+(\.\d+)?$/)) { 
+        // !price.match(/^\d+$/) <-- added this to only accept numbers
+        // So I just updated it because its not accepting decimal values
+        alert('Invalid Input');
+        return
+    }
 
-getTotalBtn.addEventListener('click', () => {
-    totalItems.textContent = totalItems(cart)
+    cart = add(cart, item, price)
+    renderCart()
+
+    // So I'm adding this to return to blank after every add
+    itemName.value = ''
+    itemPrice.value = ''
 })
 
-// Perfectly WORKINGGGG, its just the remove and the update that im stuck with....
+// I am so confused and lost with the flow of the system, like idk whats being read first and whats whatever
+// How would I add a cojndition if a new item is being added so i can put the newInput as the price
+// Like where do i put it? Render cart? addFunction? event listener? I am so confused
+// So functions are as is, the renderCart basically is the frontend updater, while the event listeners
+// are the one who calls the render cart? Am I correct?
 
-getTotalPriceBtn.addEventListener('click', () => {
+// Okay, so I somehow fixed it, fixed the overlapping issue with the .innerHTML = '' trick\
+// Added a price value and then will add validations for both inputs to make sure it has values
 
-})
+// I want to have the price updated if the same item gets added with a new price, how would I do that?
+
+
+// Okay, moving on to other event listeners
+
+clearCart.addEventListener('click')

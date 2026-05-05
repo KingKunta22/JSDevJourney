@@ -8,15 +8,22 @@
 <body> 
     <h1>Cart System</h1>
 
-    <input id="itemInput" type="text" placeholder="Enter item name">
-    <button id="addBtn">Add Item</button>
+    <div>
+        <input id="itemInput" type="text" placeholder="Enter item name">
+        <input id="itemPrice" type="text" placeholder="Enter item price">
+        <button id="addBtn">Add Item</button>
+    </div>
 
     <ul id="cartList"></ul>
 
-    <button id="getTotal">Get Total</button>
-    <button id="getTotalPrice">Get Total Price</button>
+    <button id="getItems">Get Total Items</button>
+    <button id="getPrice">Get Total Price</button>
     <h1>Total Items: <span id='totalItems'></span></h1>
     <h1>Total Price: <span id='totalPrice'></span></h1>
+
+    <div>
+        <button id="clearCart">Clear Cart</button>
+    </div>
     
     <script src="script26.js"></script>
 </body>
