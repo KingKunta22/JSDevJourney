@@ -64,6 +64,10 @@ function getTotalPrice(cart){
     //     return 0
     // }
     // Well, that didn't work so i just entered 0 on the html XD
+    // if(cart == 0 || cart == null || cart == []){
+    //     total = 0;
+    // }
+    // This didn't work as well, I believe I need to put it onto the other eventlistenrS?
 
     return total
 }
@@ -132,12 +136,18 @@ function renderCart(){
         cartList.appendChild(li)
         // I wonder if you can access these newly created buttons in javascript on css?
         // Like can I add a button class and then it'll apply it? I believe so, actually I will try
-
         const totalItemUI = document.getElementById('totalItems')
-        totalItemUI.textContent = getTotalItems(cart)
-
         const totalPriceUI = document.getElementById('totalPrice')
-        totalPriceUI.textContent = getTotalPrice(cart)
+
+        if(cart == 0 || cart == null || cart == []){
+            totalItemUI.textContent = 0
+            totalPriceUI.textContent = 0
+        } else {
+            totalItemUI.textContent = getTotalItems(cart)
+            totalPriceUI.textContent = getTotalPrice(cart)
+        }
+        // That didn't workkkkk......... whateva i give up
+
         // Okay, thats working, but I need to show '0' if theres nothing or no items
         // Or, I could just do the lazy way > remove the total items appearance if no items added XD
         // Wait, that might actually has the same difficulty so im stuck here XD...
