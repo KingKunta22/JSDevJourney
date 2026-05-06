@@ -16,7 +16,7 @@ function add(cart, targetItem, targetPrice){
     if(exists){
         cart = cart.map(item => {
             if(item.name.toLowerCase() === targetItem.toLowerCase()){
-                return {...item, qty: item.qty + 1}
+                return {...item, price: targetPrice, qty: item.qty + 1}
             }
             return item
         })
@@ -31,20 +31,23 @@ function add(cart, targetItem, targetPrice){
 }
 
 function remove(cart, targetItem){
-    let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
+    // let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
 
-    if(exists){
-        cart = cart.map(item => {
-            if(item.name.toLowerCase() === targetItem.toLowerCase()){
-                return {...item, qty: 0}
-            }
-            return item
-        })
+    // if(exists){
+    //     cart = cart.map(item => {
+    //         if(item.name.toLowerCase() === targetItem.toLowerCase()){
+    //             return {...item, qty: 0}
+    //         }
+    //         return item
+    //     })
 
-        let updatedCart = cart.filter(item => item.qty > 0)
+    //     let updatedCart = cart.filter(item => item.qty > 0)
 
-        return updatedCart
-    }
+    //     return updatedCart
+    // }
+    return cart.filter(item => {
+        item.name.toLowerCase() !== targetItem.toLowerCase()
+    })
 }
 
 function getTotalItems(cart){
@@ -136,27 +139,39 @@ function renderCart(){
         cartList.appendChild(li)
         // I wonder if you can access these newly created buttons in javascript on css?
         // Like can I add a button class and then it'll apply it? I believe so, actually I will try
-        const totalItemUI = document.getElementById('totalItems')
-        const totalPriceUI = document.getElementById('totalPrice')
+        // const totalItemUI = document.getElementById('totalItems')
+        // const totalPriceUI = document.getElementById('totalPrice')
 
-        if(cart == 0 || cart == null || cart == []){
-            totalItemUI.textContent = 0
-            totalPriceUI.textContent = 0
-        } else {
-            totalItemUI.textContent = getTotalItems(cart)
-            totalPriceUI.textContent = getTotalPrice(cart)
-        }
+        // if(cart == 0 || cart == null || cart == []){
+        //     totalItemUI.textContent = 0
+        //     totalPriceUI.textContent = 0
+        // } else {
+        //     totalItemUI.textContent = getTotalItems(cart)
+        //     totalPriceUI.textContent = getTotalPrice(cart)
+        // }
         // That didn't workkkkk......... whateva i give up
 
         // Okay, thats working, but I need to show '0' if theres nothing or no items
         // Or, I could just do the lazy way > remove the total items appearance if no items added XD
         // Wait, that might actually has the same difficulty so im stuck here XD...
     })
+
+    const totalItemUI = document.getElementById('totalItems')
+    const totalPriceUI = document.getElementById('totalPrice')
+
+    if(cart.length === 0) {
+        totalItemUI.textContent = 0
+        totalPriceUI.textContent = 0
+    } else {
+        totalItemUI.textContent = getTotalItems(cart)
+        const total = getTotalPrice(cart)
+        totalPriceUI.textContent = '₱' + total
+    }
 }
 
 addBtn.addEventListener('click', () => {
     const item = itemName.value
-    const price = itemPrice.value
+    const price = itemPrice.value // So I tried this number but it wont work on regex broteherrr
 
     if(!item.match(/^[a-zA-Z]+(\s{1}[a-zA-Z]+)*$/) || !price.match(/^\d+(\.\d+)?$/)) { 
         alert('Invalid Input');
