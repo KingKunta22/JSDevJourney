@@ -6,9 +6,29 @@
 // For chatgpt: This isn't even considered as a personal portfolio though, it doesn't look good
 // I mean is this already considered as calculator-app-level difficulty? If so, then ig im wrong
 
+// const savedCart = JSON.parse(localStorage.getItem('cart'))
+// Okay, that didnt work, I refreshed and it didnt save XD
+
+// let cart; 
+
+// if(JSON.parse(localStorage.getItem('cart'))){
+//     const savedCart = JSON.parse(localStorage.getItem('cart'))
+//     cart = savedCart;
+// } else {
+//     cart = []
+// }
 
 
-let cart = []
+// Well, that didnt work too XDDD
+// let cart = []
+
+// Okay, it still isnt working if I refresh it soo....
+
+// Alright, asked gemini for it and then it gave me the answer (not literally but I get what hes saying now)
+// I basically just need to rendercart before the script ends so that it saves the last save
+
+// I can also do better on hte if condition... Here it is...
+let cart = JSON.parse(localStorage.getItem('cart')) || []
 
 function add(cart, targetItem, targetPrice){
     let exists = cart.find(item => item.name.toLowerCase() === targetItem.toLowerCase())
@@ -45,9 +65,9 @@ function remove(cart, targetItem){
 
     //     return updatedCart
     // }
-    return cart.filter(item => {
+    return cart.filter(item => 
         item.name.toLowerCase() !== targetItem.toLowerCase()
-    })
+    )
 }
 
 function getTotalItems(cart){
@@ -167,6 +187,8 @@ function renderCart(){
         const total = getTotalPrice(cart)
         totalPriceUI.textContent = '₱' + total
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 addBtn.addEventListener('click', () => {
@@ -240,3 +262,28 @@ function decreaseQty(cart, targetItem){
     //     alert('Invalid Input');
     //     return
     // }
+
+// Okay, I'll try the localstorage save option...
+
+
+
+
+
+// Okay, so I just looked it up on AI and then it told me a few hints and tips instead of the exact full code
+// Now, I also learned to look for the local storage and then it didnt save everytime I click add
+// So it said I should set item every add and then do I need to do that per event listener? 
+// Or to make everything simple, and easy, just add it onto the render cart?
+// I also tried the const savedCart line right before the let cart and it still didnt work, 
+// I think I need to use an if else here...
+
+// So there are 3 keys actually on the localstorage and idk what those are..
+// : cart, savedCart, and tasks... idk what tasks is
+
+// OH OKAY, NOW I SEE THE OBJECT VALUES ON THE CART KEY AND THAT HAPPENED WHEN I 
+// PUT THE LINE:
+//          localStorage.setItem('cart', JSON.stringify(cart));
+// INSIDE THE RENDER CART (RIGHT BEFORE THE END)
+
+
+// The finishing touch...
+
