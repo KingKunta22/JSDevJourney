@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart System</title>
 </head>
+<style>
+    button#increaseBtn{
+            background-color:green;
+            color:white
+    }
+    button#decreaseBtn{
+            background-color:red;
+            color:white
+    }
+    button#newBtn{
+        margin-left:20px;
+    }
+</style>
 <body> 
     <h1>Cart System</h1>
 
@@ -18,13 +31,13 @@
 
     <button id="getItems">Get Total Items</button>
     <button id="getPrice">Get Total Price</button>
-    <h1>Total Items: <span id='totalItems'></span></h1>
-    <h1>Total Price: <span id='totalPrice'></span></h1>
+    <h1>Total Items: <span id='totalItems'>0</span></h1>
+    <h1>Total Price: <span id='totalPrice'>0</span></h1>
 
     <div>
         <button id="clearCart">Clear Cart</button>
     </div>
     
-    <script src="script26.js"></script>
+    <script src="script30.js"></script>
 </body>
 </html>

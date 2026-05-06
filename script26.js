@@ -440,7 +440,7 @@ function getTotalPrice(cart){
     let total = cart.reduce((sum, item) => {
         return sum + item.price * item.qty
     }, 0)
-    
+
     return total
 }
 
@@ -538,3 +538,7 @@ clear.addEventListener('click', () => {
     cart = clearCart(cart)
     renderCart()
 })
+
+// YEY, ITS NOW WORKING. NOW THE PROBLEM IS THAT IF I ADD AN EXISTING ITEM WITH A NEW PRICE IT SHOULD
+// UPDATE THE PRICE, BUT IDK, IT SHOULDNT? I BELIEVE THAT I SHOULD JUST HAVE A VALIDATION THAT
+// IT SHOULDN'T HAVE A NEW PRICE, OR JSUT SIMPLY ADD IT AS A NEW ITEM? BUT WHATEVER
