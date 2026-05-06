@@ -200,7 +200,7 @@ addBtn.addEventListener('click', () => {
         return
     }
 
-    cart = add(cart, item, price)
+    cart = add(cart, item, Number(price)) //Okay fixed it while using regex, thanks gemini xd
 
     // So this is working but it doesnt get applied to any other eventListeners
     // // Oh right, I need to add these to the render cart instead...
@@ -287,3 +287,8 @@ function decreaseQty(cart, targetItem){
 
 // The finishing touch...
 
+renderCart()
+
+
+// OH GREAT ITS WORKING NOWW AS EXPECTED BECAUSE I ASKED AI TO HELP ME BUT WHATEVER
+// IDK IF I SHOULD FEEL  THIS GOOD OR TONE DOWN MY SHIT BECAUSE I ASKED AI.... ANYWAyss ezzz
