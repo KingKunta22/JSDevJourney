@@ -27,6 +27,7 @@ import { useState } from 'react'
 function App() {
 
   const [count, setCount] = useState(0)
+  const [userInput, setInput] = useState()
 
   return (
     <div>
@@ -38,9 +39,19 @@ function App() {
       <button onClick={() => setCount(count - 1)}>
         Decrease
       </button>
+      <div>
+        <input type="text" value={userInput}/>
+        <button onClick={() => setInput(userInput)}>
+          Enter
+        </button>
+      </div>
+      <div>
+        <h1>You typed: {userInput}</h1>
+      </div>
     </div>
+    // Oh and I just realized it doesnt even update live automatically...
+    // Yep im fucking confused, I need to watch yt tutorial for this xd
   )
-
 }
 
 export default App
