@@ -1,23 +1,23 @@
 // import { Fragment } from 'react';
 // import { MouseEvent } from "react";
-import { useState }from 'react';
+import { useState } from "react";
 
 function getMessage() {
   return <p>Sample Message</p>;
 }
 
 interface ListGroupProps {
-  items: string[],
-  heading: string,
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
 }
 
-function ListGroup({ items, heading }: ListGroupProps) {
+function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
+  //   const selectedItem = 0;
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
-//   const selectedItem = 0;
-  const [selectedIndex, setSelectedIndex] = useState(-1)
-
-//   // Event Handler
-//   const handleClick = (event: MouseEvent) => console.log(event);
+  //   // Event Handler
+  //   const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
@@ -32,7 +32,10 @@ function ListGroup({ items, heading }: ListGroupProps) {
                 : "px-4 py-2 hover:bg-zinc-50 cursor-pointer"
             }
             key={item}
-            onClick={() => { setSelectedIndex(index); }}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item)
+            }}
           >
             {item}
           </li>
