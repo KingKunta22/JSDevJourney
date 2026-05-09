@@ -34,7 +34,7 @@ function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
-              onSelectItem(item)
+              onSelectItem(item);
             }}
           >
             {item}
