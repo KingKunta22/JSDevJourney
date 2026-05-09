@@ -2,21 +2,26 @@
 // import { MouseEvent } from "react";
 import { useState }from 'react';
 
-function ListGroup() {
-  function getMessage() {
-    return <p>Sample Message</p>;
-  }
+function getMessage() {
+  return <p>Sample Message</p>;
+}
 
-  const items = ["Cebu", "Makati", "Metro Manila", "Davao", "Naga"];
+interface ListGroupProps {
+  items: string[],
+  heading: string,
+}
+
+function ListGroup({ items, heading }: ListGroupProps) {
+
 //   const selectedItem = 0;
-    const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
 
 //   // Event Handler
 //   const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
-      <h1 className="text-4xl font-bold">List Group</h1>
+      <h1 className="text-4xl font-bold">{heading}</h1>
       {items.length === 0 && getMessage()}
       <ul className="w-64 rounded-lg border border-zinc-200 bg-white divide-y divide-zinc-200 overflow-hidden">
         {items.map((item, index) => (
