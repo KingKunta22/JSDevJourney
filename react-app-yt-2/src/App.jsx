@@ -9,6 +9,8 @@ function App() {
   return(
     <>
       <Student name="Leo" age={25} isStudent={true}/>
+      <Student name="Inferior" age={30} isStudent={false}/>
+      <Student name="Leon" age={12} isStudent={false}/>
     </>
   )
 

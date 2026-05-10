@@ -1,4 +1,28 @@
-.card {
+.student {
+  font-family:'Poppins';
+  font-size:1em;
+  padding:10px;
+  border:1px solid hsla(0, 0%, 50%, 0.8);
+  width:30%;
+}
+
+.student p{
+  margin:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .card {
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
@@ -25,4 +49,5 @@
 .card .card-text {
   font-family: 'Poppins';
   color: hsl(0%, 0%, 30%);
-}
+} */
+
