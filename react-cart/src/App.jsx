@@ -55,3 +55,6 @@ function App() {
 }
 
 export default App
+
+// Alright, so I just finished an hour tutorial which lasted a day.... I hope I can get this right now XDDDD
+
