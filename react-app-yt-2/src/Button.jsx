@@ -1,10 +1,29 @@
-function Button() {
-    const handleClick = () => { console.log('OUCH!')}
-    function handleClick2(name) {
-        console.log('Hello ' + name)
-    }
+// function Button() {
+//     // const handleClick = () => { console.log('OUCH!')}
+//     // function handleClick2(name) {
+//     //     console.log('Hello ' + name)
+//     // }
 
-    return(<button onClick={() => handleClick2('Leo')}>Click me!!</button>)
+//     let count = 0;
+//     const handleClick = (name) => {
+//         if(count < 3) {
+//             count++
+//             console.log(`${name}, you clicked me ${count} time/s`)
+//         } else {
+//             console.log(`${name}, that's too much, I am calling the cops!`)
+//         }
+//     }
+
+//     return(<button onClick={() => handleClick('Leo')}>Click me!!</button>)
+// }
+
+// export default Button
+
+function Button() {
+
+    const handleClick = (e) => e.target.textContent = "OUCH"
+
+    return(<button onClick={(e) => handleClick(e)}>Click me!!</button>)
 }
 
 export default Button
