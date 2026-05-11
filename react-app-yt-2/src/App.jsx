@@ -4,33 +4,11 @@
 // import Card from './Card.jsx'
 // import Student from './Student.jsx'
 // import UserGreeting from './UserGreeting.jsx'
-import List from './List.jsx'
+// import List from './List.jsx'
+import Button from './Button.jsx'
 
 function App() {
-  
-    const fruits = [
-        {id: 1, name: 'apple', calories: 51}, 
-        {id: 2, name: 'mango', calories: 60}, 
-        {id: 3, name: 'watermelon', calories: 105}, 
-        {id: 4, name: 'peach', calories: 45}, 
-        {id: 5, name: 'strawberry', calories: 67}
-    ]
-
-    const vegetables = [
-        {id: 1, name: 'carrots', calories: 8}, 
-        {id: 2, name: 'cabbage', calories: 5}, 
-        {id: 3, name: 'tomatoes', calories: 10}, 
-        {id: 4, name: 'squash', calories: 4}, 
-        {id: 5, name: 'broccoli', calories: 6}
-    ]
-
-  return(
-    <>
-      {fruits.length > 0 &&  <List items={fruits} category="Fruits"/>}
-      {vegetables.length > 0 && <List items={vegetables} category="Vegetables"/>}
-    </>
-  )
-
+  return(<Button/>)
 }
 
 export default App
