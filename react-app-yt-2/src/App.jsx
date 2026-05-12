@@ -7,10 +7,11 @@
 // import List from './List.jsx'
 // import Button from './Button.jsx'
 // import MyComponent from './MyComponent'
-import Counter from './Counter.jsx'
+// import Counter from './Counter.jsx'
+import EventHandler from './EventHandler.jsx'
 
 function App() {
-  return(<Counter />)
+  return(<EventHandler />)
 }
 
 export default App
