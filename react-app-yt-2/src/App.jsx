@@ -5,10 +5,11 @@
 // import Student from './Student.jsx'
 // import UserGreeting from './UserGreeting.jsx'
 // import List from './List.jsx'
-import Button from './Button.jsx'
+// import Button from './Button.jsx'
+import MyComponent from './MyComponent'
 
 function App() {
-  return(<Button/>)
+  return(<MyComponent />)
 }
 
 export default App
