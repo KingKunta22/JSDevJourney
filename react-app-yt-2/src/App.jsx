@@ -6,10 +6,11 @@
 // import UserGreeting from './UserGreeting.jsx'
 // import List from './List.jsx'
 // import Button from './Button.jsx'
-import MyComponent from './MyComponent'
+// import MyComponent from './MyComponent'
+import Counter from './Counter.jsx'
 
 function App() {
-  return(<MyComponent />)
+  return(<Counter />)
 }
 
 export default App
